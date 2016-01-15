@@ -32,6 +32,7 @@ $selectron-min-width:               200px !default
 $selectron-padding:                 17px 50px 18px 18px !default
 $selectron-option-padding:          13px 18px 14px !default
 $selectron-optgroup-padding:        13px 18px 14px 28px !default
+$selectron-height:                  50px
 
 
 // --------------------------------------------------------------------------
@@ -51,14 +52,32 @@ $selectron-optgroup-padding:        13px 18px 14px 28px !default
   &--disabled
     opacity: 0.5 
 
+  &--is-touch &
+    
+    &__select
+      color: $selectron-color-font
+      font-family: $selectron-font-family
+      font-size: $selectron-font-size
+      font-size: $selectron-font-size
+      height: 100%
+      padding: $selectron-padding
+      visibility: visible
+      width: 100%
+      -webkit-appearance: none
+      -moz-appearance: none
+      appearance: none
+
 
   // ------------------------------------------------------------------------
   // Select
   // ------------------------------------------------------------------------
   
   &__select
+    background-color: transparent
+    border: none
     height: 0
     left: 0
+    outline: none
     position: absolute
     top: 0
     visibility: hidden
@@ -69,6 +88,7 @@ $selectron-optgroup-padding:        13px 18px 14px 28px !default
   // Trigger
   // ------------------------------------------------------------------------
 
+  &--is-touch,
   &__trigger
     background-color: $selectron-color-background-light
     border-radius: $selectron-border-radius
@@ -77,6 +97,7 @@ $selectron-optgroup-padding:        13px 18px 14px 28px !default
     color: lighten($selectron-color-font, 30%)
     cursor: pointer
     font-size: $selectron-font-size
+    height: $selectron-height
     line-height: 1
     outline: none
     overflow: hidden
@@ -145,7 +166,7 @@ $selectron-optgroup-padding:        13px 18px 14px 28px !default
     padding: 0
     position: absolute
     top: 100%
-    transition: opacity 0.2s, visibility 0.2s
+    transition: opacity 0.5s, visibility 0.5s
     visibility: hidden
     width: 100%
     z-index: 50

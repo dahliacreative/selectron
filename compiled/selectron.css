@@ -13,8 +13,6 @@
 //     Repo: github.com/dahliacreative/selectron
 //   Issues: github.com/dahliacreative/selectron/issues
 // -------------------------------------------------------------------------- */
-
-
 .selectron {
   color: #666666;
   display: inline-block;
@@ -30,16 +28,33 @@
   opacity: 0.5;
 }
 
+.selectron--is-touch .selectron__select {
+  color: #666666;
+  font-family: sans-serif;
+  font-size: 13px;
+  font-size: 13px;
+  height: 100%;
+  padding: 17px 50px 18px 18px;
+  visibility: visible;
+  width: 100%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
 .selectron__select {
+  background-color: transparent;
+  border: none;
   height: 0;
   left: 0;
+  outline: none;
   position: absolute;
   top: 0;
   visibility: hidden;
   width: 0;
 }
 
-.selectron__trigger {
+.selectron--is-touch, .selectron__trigger {
   background-color: #ffffff;
   border-radius: 4px;
   border: 1px solid #cccccc;
@@ -47,6 +62,7 @@
   color: #b3b3b3;
   cursor: pointer;
   font-size: 13px;
+  height: 50px;
   line-height: 1;
   outline: none;
   overflow: hidden;
@@ -58,25 +74,25 @@
   width: 100%;
 }
 
-.selectron__trigger--is-filled {
+.selectron--is-touch--is-filled, .selectron__trigger--is-filled {
   color: #666666;
 }
 
-.selectron__trigger--is-open {
+.selectron--is-touch--is-open, .selectron__trigger--is-open {
   border-color: #999999;
   border-radius: 4px 4px 0 0;
   color: #666666;
 }
 
-.selectron__trigger--is-overflowing {
+.selectron--is-touch--is-overflowing, .selectron__trigger--is-overflowing {
   border-radius: 0 0 4px 4px;
 }
 
-.selectron__trigger:focus {
+.selectron--is-touch:focus, .selectron__trigger:focus {
   border-color: #999999;
 }
 
-.selectron__trigger:before, .selectron__trigger:after {
+.selectron--is-touch:before, .selectron--is-touch:after, .selectron__trigger:before, .selectron__trigger:after {
   background-color: #f70c36;
   content: "";
   height: 2px;
@@ -85,7 +101,7 @@
   width: 10px;
 }
 
-.selectron__trigger:before {
+.selectron--is-touch:before, .selectron__trigger:before {
   right: 17px;
   -webkit-transform: rotate(-45deg) translateY(-50%);
   -ms-transform: rotate(-45deg) translateY(-50%);
@@ -93,7 +109,7 @@
   transform: rotate(-45deg) translateY(-50%);
 }
 
-.selectron__trigger:after {
+.selectron--is-touch:after, .selectron__trigger:after {
   right: 25px;
   -webkit-transform: rotate(45deg) translateY(-50%);
   -ms-transform: rotate(45deg) translateY(-50%);
@@ -116,7 +132,7 @@
   padding: 0;
   position: absolute;
   top: 100%;
-  transition: opacity 0.2s, visibility 0.2s;
+  transition: opacity 0.5s, visibility 0.5s;
   visibility: hidden;
   width: 100%;
   z-index: 50;

@@ -17,6 +17,7 @@
 (function($) {
 
   $.fn.selectron = function() {
+    var isTouch = false;
     
     // ----------------------------------------------------------------------
     // Check for touch events
@@ -24,7 +25,7 @@
     if (('ontouchstart' in window) ||
         (navigator.maxTouchPoints > 0) ||
         (navigator.msMaxTouchPoints > 0)) {
-      var isTouch = true;
+      isTouch = true;
     }
 
     return this.each(function() {
@@ -59,11 +60,6 @@
       // Build Options
       // --------------------------------------------------------------------
       populateOptions = function() {
-
-        // If touch events
-        if(isTouch) {
-          return;
-        }
 
         var selectChildren = select.find('> *');
           selectChildren.each(function() {
@@ -103,13 +99,13 @@
         hovered.addClass('selectron__option--is-hovered').siblings().removeClass('selectron__option--is-hovered');
 
         if(hovered.is(':first-child')) {
-            options.scrollTop: 0);
+            options.scrollTop(0);
         } else if(hovered.is(':last-child')) {
-            options.scrollTop: options[0].scrollHeight);
+            options.scrollTop(options[0].scrollHeight);
         } else if(optionTop > (listHeight - optionHeight)) {
-            options.scrollTop: optionTop + (scrollPosition - (listHeight - optionHeight)));
+            options.scrollTop(optionTop + (scrollPosition - (listHeight - optionHeight)));
         } else if(optionTop < optionHeight) {
-            options.scrollTop: optionTop + scrollPosition);
+            options.scrollTop(optionTop + scrollPosition);
         }
       }
 
@@ -118,19 +114,22 @@
       // --------------------------------------------------------------------
       toggleOptions = function(e) {
         e.stopPropagation();
-        if(!isTouch) {
+        if(!isDisabled) {
           options.toggleClass('selectron__options--is-open');
+          isOpen = trigger.toggleClass('selectron__trigger--is-open').hasClass('selectron__trigger--is-open');
         }  
-        isOpen = trigger.toggleClass('selectron__trigger--is-open').hasClass('selectron__trigger--is-open');
+        
       }
 
       // --------------------------------------------------------------------
       // Open Options
       // --------------------------------------------------------------------
       openOptions = function() {
-        options.addClass('selectron__options--is-open');
-        trigger.addClass('selectron__trigger--is-open');
-        isOpen = true;
+        if(!isDisabled) {
+          options.addClass('selectron__options--is-open');
+          trigger.addClass('selectron__trigger--is-open');
+          isOpen = true;
+        }
       }
 
       // --------------------------------------------------------------------
@@ -272,8 +271,15 @@
         wrapper.addClass('selectron--dark');
       }
       select.replaceWith(wrapper);
+      wrapper.toggleClass('selectron--disabled', isDisabled);
+      wrapper.toggleClass('selectron--is-touch', isTouch);
+      
+      if(isTouch) {
+        wrapper.append(select);
+        return;
+      }
+
       wrapper.append(select, trigger, options);
-      wrapper.toggleClass('selectron__disabled', isDisabled);
 
       // Event Listeners
       trigger.on('click', toggleOptions);
