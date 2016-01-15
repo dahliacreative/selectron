@@ -54,7 +54,6 @@
   position: relative;
   text-align: left;
   text-overflow: ellipsis;
-  transition: all 0.2s;
   white-space: nowrap;
   width: 100%;
 }
@@ -143,7 +142,6 @@
   overflow: hidden;
   padding: 13px 18px 14px;
   text-overflow: ellipsis;
-  transition: all 0.2s;
   white-space: nowrap;
 }
 

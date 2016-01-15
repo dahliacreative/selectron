@@ -103,13 +103,13 @@
         hovered.addClass('selectron__option--is-hovered').siblings().removeClass('selectron__option--is-hovered');
 
         if(hovered.is(':first-child')) {
-            options.stop().animate({ scrollTop: 0 });
+            options.scrollTop: 0);
         } else if(hovered.is(':last-child')) {
-            options.stop().animate({ scrollTop: options[0].scrollHeight });
+            options.scrollTop: options[0].scrollHeight);
         } else if(optionTop > (listHeight - optionHeight)) {
-            options.stop().animate({ scrollTop: optionTop + (scrollPosition - (listHeight - optionHeight)) });
+            options.scrollTop: optionTop + (scrollPosition - (listHeight - optionHeight)));
         } else if(optionTop < optionHeight) {
-            options.stop().animate({ scrollTop: optionTop + scrollPosition });
+            options.scrollTop: optionTop + scrollPosition);
         }
       }
 
