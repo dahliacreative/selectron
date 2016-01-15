@@ -30,6 +30,8 @@ $selectron-font-size:               13px !default
 $selectron-max-width:               400px !default
 $selectron-min-width:               200px !default
 $selectron-padding:                 17px 50px 18px 18px !default
+$selectron-option-padding:          13px 18px 14px !default
+$selectron-optgroup-padding:        13px 18px 14px 28px !default
 
 
 // --------------------------------------------------------------------------
@@ -170,10 +172,13 @@ $selectron-padding:                 17px 50px 18px 18px !default
     cursor: pointer
     line-height: 1
     overflow: hidden
-    padding: 13px 18px 14px
+    padding: $selectron-option-padding
     text-overflow: ellipsis
     transition: all 0.2s
     white-space: nowrap
+
+    &--optgroup
+      padding: $selectron-optgroup-padding
 
     &--is-selected
       background-color: transparent
@@ -181,11 +186,21 @@ $selectron-padding:                 17px 50px 18px 18px !default
 
     &--is-disabled,
     &[data-value=""]
-      color: lighten($selectron-color-font, 30%)
+      color: lighten($selectron-color-font, 40%)
 
     &--is-hovered
       background-color: $selectron-color-brand
       color: #fff !important
+
+
+  // ------------------------------------------------------------------------
+  // Option Group
+  // ------------------------------------------------------------------------
+
+  &__option-group
+    color: $selectron-color-light
+    cursor: default
+    padding: $selectron-option-padding
 
 
   // ------------------------------------------------------------------------

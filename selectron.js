@@ -30,6 +30,32 @@
     return this.each(function() {
 
       // --------------------------------------------------------------------
+      // Create Option
+      // --------------------------------------------------------------------
+      createOption = function(selectOption, isInGroup) {
+        var value = selectOption.val(),
+            content = selectOption.text(),
+            isDisabled = selectOption.prop('disabled'),
+            isSelected = selectOption.prop('selected'),
+            option = $('<li class="selectron__option" data-value="' + value + '">' + content + '</li>');
+
+        // Disabled, selected, or Optgroup
+        option.toggleClass('selectron__option--is-disabled', isDisabled);
+        option.toggleClass('selectron__option--is-selected', isSelected);
+        option.toggleClass('selectron__option--optgroup', isInGroup);
+
+        // Event Listener
+        option.on('click', function() {
+          updateSelection($(this));
+        });
+        option.on('mouseenter', function() {
+          updateHover($(this));
+        });
+
+        return option;
+      }
+
+      // --------------------------------------------------------------------
       // Build Options
       // --------------------------------------------------------------------
       populateOptions = function() {
@@ -39,33 +65,28 @@
           return;
         }
 
-        // Build Options
-        select.find('option').each(function() {
-          var selectOption = $(this),
-              value = selectOption.val(),
-              content = selectOption.text(),
-              isDisabled = selectOption.prop('disabled'),
-              isSelected = selectOption.prop('selected'),
-              option = $('<li class="selectron__option" data-value="' + value + '">' + content + '</li>');
+        var selectChildren = select.find('> *');
+          selectChildren.each(function() {
+            var child = $(this),
+                isOptGroup = child.is('optgroup');
 
-          // Disabled or selected
-          option.toggleClass('selectron__option--is-disabled', isDisabled);
-          option.toggleClass('selectron__option--is-selected', isSelected);
+            if(isOptGroup) {
+              var selectOptions = child.find('option'),
+                  content = child.attr('label'),
+                  optionGroup = $('<li class="selectron__option-group">' + content + '</li>');
 
-          // Event Listener
-          option.on('click', function() {
-            updateSelection($(this));
+              options.append(optionGroup);
+              selectOptions.each(function() {
+                var selectOption = $(this);
+                options.append(createOption(selectOption, true));
+              });
+            } else {
+              options.append(createOption(child, false));
+            }
+            
           });
-          option.on('mouseenter', function() {
-            updateHover($(this));
-          });
-
-          // Append to DOM
-          options.append(option);
-        });
 
         options.find('.selectron__option:first').addClass('selectron__option--is-hovered');
-
         updateTrigger();
 
       }
@@ -110,7 +131,6 @@
       // Update Selection
       // --------------------------------------------------------------------
       updateSelection = function(selected) {
-        console.log(selected);
         var value = selected.data('value');
         selected.addClass('selectron__option--is-selected').siblings().removeClass('selectron__option--is-selected');
         updateTrigger();
@@ -142,48 +162,64 @@
       // Handle Key Strokes
       // --------------------------------------------------------------------
       handleKeyStrokes = function(e) {
-        var hovered = options.find('.selectron__option--is-hovered');
+        var hovered = options.find('.selectron__option--is-hovered'),
+            enterKeyPressed = e.which === 13,
+            spaceKeyPressed = e.which === 32,
+            upArrowKeyPressed = e.which === 38,
+            downArrowKeyPressed = e.which === 40,
+            alphaNumbericKeyPressed = (e.which >= 48 && e.which <= 57) || (e.which >= 65 && e.which <= 90) || e.which === 8;
 
-        if(!isOpen && e.which != 32) {
+        if(!isOpen && (upArrowKeyPressed || downArrowKeyPressed || enterKeyPressed)) {
           return false;
         }
 
-        if(e.which === 32) {
-          if(!isOpen) {
-            openOptions();
-          } else {
-            closeOptions();
-          }
-        }
-
-        if(e.which === 13) {
+        if(enterKeyPressed) {
           closeOptions();
           updateSelection(hovered);
         }
 
-        if(e.which === 38 || e.which === 40) {
+        if(spaceKeyPressed) {
+          if(searchTerm === "") {
+            if(!isOpen) {
+              openOptions();
+            } else {
+              closeOptions();
+              updateSelection(hovered);
+            }
+          }
+        }
+
+        if(upArrowKeyPressed || downArrowKeyPressed) {
           var nextElement;
 
-          if(e.which === 40) {
+          if(downArrowKeyPressed) {
               nextElement = hovered.is(':last-child') ? options.find('.selectron__option:first-child') : hovered.next();
-          } else if(e.which === 38) {
+              if(nextElement.hasClass('selectron__option-group')) {
+                nextElement = nextElement.next();
+              }
+          } else if(upArrowKeyPressed) {
               nextElement = hovered.is(':first-child') ? options.find('.selectron__option:last-child') : hovered.prev();
+              if(nextElement.hasClass('selectron__option-group')) {
+                nextElement = nextElement.prev();
+              }
           }
 
           updateHover(nextElement);
         }
 
-        if((e.which >= 48 && e.which <= 57) || (e.which >= 65 && e.which <= 90) || e.which === 8) {
+        if(alphaNumbericKeyPressed || spaceKeyPressed) {
           clearTimeout(searchTimeout);
           searchTimeout = setTimeout(clearSearchTerm, 500);
           searchTerm += String.fromCharCode(e.which).toLowerCase();
           optCount = options.find('li').length + 1;
-          console.log(searchTerm)
           for(var i = 1; i < optCount; i ++) {
-            var current = options.find('li:nth-child(' + i + ')'),
+            var current = options.find('.selectron__option:nth-child(' + i + ')'),
                 text = current.text().toLowerCase();
             if(text.indexOf(searchTerm) >= 0) {
               current.addClass('selectron__option--is-hovered').siblings().removeClass('selectron__option--is-hovered');
+              if(!isOpen) {
+                updateSelection(hovered);
+              }
               return;
             }
           }
@@ -195,7 +231,7 @@
       // Clear Search Term
       // --------------------------------------------------------------------
       clearSearchTerm = function() {
-        searchTerm = '';
+        searchTerm = "";
       }
 
       // --------------------------------------------------------------------

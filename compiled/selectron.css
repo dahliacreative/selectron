@@ -14,6 +14,7 @@
 //   Issues: github.com/dahliacreative/selectron/issues
 // -------------------------------------------------------------------------- */
 
+
 .selectron {
   color: #666666;
   display: inline-block;
@@ -76,8 +77,7 @@
   border-color: #999999;
 }
 
-.selectron__trigger:before,
-.selectron__trigger:after {
+.selectron__trigger:before, .selectron__trigger:after {
   background-color: #f70c36;
   content: "";
   height: 2px;
@@ -147,19 +147,28 @@
   white-space: nowrap;
 }
 
+.selectron__option--optgroup {
+  padding: 13px 18px 14px 28px;
+}
+
 .selectron__option--is-selected {
   background-color: transparent;
   color: #f70c36;
 }
 
-.selectron__option--is-disabled,
-.selectron__option[data-value=""] {
-  color: #b3b3b3;
+.selectron__option--is-disabled, .selectron__option[data-value=""] {
+  color: #cccccc;
 }
 
 .selectron__option--is-hovered {
   background-color: #f70c36;
   color: #fff !important;
+}
+
+.selectron__option-group {
+  color: #999999;
+  cursor: default;
+  padding: 13px 18px 14px;
 }
 
 .selectron--dark {
@@ -194,7 +203,8 @@
   color: #666666;
 }
 
-.selectron--dark .selectron__option--is-hovered,
-.selectron--dark .selectron__option:hover {
+.selectron--dark .selectron__option--is-hovered, .selectron--dark .selectron__option:hover {
   color: #fff;
 }
+
+/*# sourceMappingURL=selectron.css.map */
