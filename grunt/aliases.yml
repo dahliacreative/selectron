@@ -1,0 +1,10 @@
+default:
+  - 'clean'
+  - 'concat'
+  - 'copy'
+
+development:
+  - 'clean'
+  - 'concat'
+  - 'copy'
+  - 'watch'
