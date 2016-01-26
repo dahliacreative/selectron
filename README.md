@@ -61,7 +61,7 @@ $selectron-height:                  50px !default
 Selectron triggers a `selectron.change` event on the original `select` for you to listen to. This allows you to change the value of the `select` dynamically and trigger a `change` event, which in turn will update selectron.
 
 ##Methods
-Selectron provides an `update` method which will re-populate the options.
+Selectron provides an `selectron.update` method which when triggered on the original `select` will re-populate the options.
 
 ##License
 Copyright (c) 2016 Simon Sturgess
