@@ -171,7 +171,7 @@ Selectron.prototype.handleKeyStrokes = function(e) {
     for(var i = 1; i < optCount; i ++) {
       var current = this.options.find('.selectron__option:nth-child(' + i + ')'),
           text = current.text().toLowerCase();
-      if(text.indexOf(this.searchTerm) >= 0) {
+      if(text.indexOf(this.searchTerm) >= 0 && !this.placeholderExists || text.indexOf(this.searchTerm) >= 0 && this.placeholderExists && !current.is(':first-child')) {
         current.addClass('selectron__option--is-hovered').siblings().removeClass('selectron__option--is-hovered');
         if(!this.isOpen) {
           this.updateSelection(hovered);
@@ -220,9 +220,9 @@ Selectron.prototype.populateOptions = function() {
     }
   });
 
-  this.options
-    .find('.selectron__option:first')
-    .addClass('selectron__option--is-hovered');
+  var firstOption = this.options.find('.selectron__option:first');
+  firstOption.addClass('selectron__option--is-hovered');
+  this.placeholderExists = firstOption.data('value') === '';
 
   this.updateTrigger();
 };
@@ -232,10 +232,6 @@ Selectron.prototype.populateOptions = function() {
 // --------------------------------------------------------------------------
 Selectron.prototype.registerEvents = function() {
   var self = this;
-
-  $(document).on('click', function(e) {
-    self.toggleOptions(e, self);
-  });
 
   this.trigger.on({
     'click': function(e) {

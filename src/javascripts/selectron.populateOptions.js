@@ -24,9 +24,9 @@ Selectron.prototype.populateOptions = function() {
     }
   });
 
-  this.options
-    .find('.selectron__option:first')
-    .addClass('selectron__option--is-hovered');
+  var firstOption = this.options.find('.selectron__option:first');
+  firstOption.addClass('selectron__option--is-hovered');
+  this.placeholderExists = firstOption.data('value') === '';
 
   this.updateTrigger();
 };

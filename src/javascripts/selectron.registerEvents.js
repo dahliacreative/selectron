@@ -4,10 +4,6 @@
 Selectron.prototype.registerEvents = function() {
   var self = this;
 
-  $(document).on('click', function(e) {
-    self.toggleOptions(e, self);
-  });
-
   this.trigger.on({
     'click': function(e) {
       self.toggleOptions(e);

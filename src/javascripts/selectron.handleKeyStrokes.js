@@ -60,7 +60,7 @@ Selectron.prototype.handleKeyStrokes = function(e) {
     for(var i = 1; i < optCount; i ++) {
       var current = this.options.find('.selectron__option:nth-child(' + i + ')'),
           text = current.text().toLowerCase();
-      if(text.indexOf(this.searchTerm) >= 0) {
+      if(text.indexOf(this.searchTerm) >= 0 && !this.placeholderExists || text.indexOf(this.searchTerm) >= 0 && this.placeholderExists && !current.is(':first-child')) {
         current.addClass('selectron__option--is-hovered').siblings().removeClass('selectron__option--is-hovered');
         if(!this.isOpen) {
           this.updateSelection(hovered);
