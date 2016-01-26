@@ -1,0 +1,335 @@
+// --------------------------------------------------------------------------
+//            _           _                   
+//   ___  ___| | ___  ___| |_ _ __ ___  _ __  
+//  / __|/ _ \ |/ _ \/ __| __| '__/ _ \| '_ \ 
+//  \__ \  __/ |  __/ (__| |_| | | (_) | | | |
+//  |___/\___|_|\___|\___|\__|_|  \___/|_| |_|
+//
+// --------------------------------------------------------------------------
+//  Version: 1.0
+//   Author: Simon Sturgess
+//  Website: dahliacreative.github.io/selectron
+//     Docs: dahliacreative.github.io/selectron/docs
+//     Repo: github.com/dahliacreative/selectron
+//   Issues: github.com/dahliacreative/selectron/issues
+// --------------------------------------------------------------------------
+
+(function(window, $) {
+
+  $.fn.selectron = function() {
+    return this.each(function() {
+      new Selectron($(this)).build();
+    });
+  };
+
+})(window, jQuery);
+
+// --------------------------------------------------------------------------
+// Selectron Constructor
+// --------------------------------------------------------------------------
+var Selectron = function (select) {
+  if(select.hasClass('selectron__select') || select[0].tagName !== 'SELECT') {
+    return;
+  }
+  this.isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
+  this.isDisabled = select.prop('disabled');
+  this.darkTheme = select.hasClass('selectron--dark');
+  this.select = select;
+};
+
+// --------------------------------------------------------------------------
+// Build the DOM
+// --------------------------------------------------------------------------
+Selectron.prototype.build = function() {
+  this.wrapper = $('<div class="selectron"/>');
+
+  this.select
+    .removeClass('selectron selectron--dark')
+    .addClass('selectron__select');
+
+  this.wrapper
+    .toggleClass('selectron--dark', this.darkTheme)
+    .toggleClass('selectron--disabled', this.isDisabled)
+    .toggleClass('selectron--is-touch', this.isTouch);
+
+  this.select.replaceWith(this.wrapper);
+
+  if(this.isTouch) {
+    this.wrapper.append(this.select);
+  } else {
+    this.searchTerm = '';
+    this.trigger = $('<button class="selectron__trigger">');
+    this.options = $('<ul class="selectron__options"/>');
+    this.wrapper.append(this.select, this.trigger, this.options);
+    this.registerEvents();
+    this.populateOptions();
+  }
+};
+
+// --------------------------------------------------------------------------
+// Clear the search term
+// --------------------------------------------------------------------------
+Selectron.prototype.clearSearchTerm = function() {
+  this.searchTerm = "";
+}
+
+// --------------------------------------------------------------------------
+// Close options
+// --------------------------------------------------------------------------
+Selectron.prototype.closeOptions = function() {
+  if(!this.optionsAreHovered) {
+    this.options.removeClass('selectron__options--is-open');
+    this.trigger.removeClass('selectron__trigger--is-open');
+    this.isOpen = false;
+  }
+}
+
+Selectron.prototype.createOption = function(selectOption, isInGroup) {
+  var value = selectOption.val(),
+      content = selectOption.text(),
+      isDisabled = selectOption.prop('disabled'),
+      isSelected = selectOption.prop('selected'),
+      option = $('<li class="selectron__option" data-value="' + value + '">' + content + '</li>'),
+      self = this;
+
+  option
+    .toggleClass('selectron__option--is-disabled', isDisabled)
+    .toggleClass('selectron__option--is-selected', isSelected)
+    .toggleClass('selectron__option--optgroup', isInGroup);
+
+  option.on({
+    'click': function() {
+      self.updateSelection($(this));
+    },
+    'mouseenter': function() {
+      self.updateHover($(this))
+    }
+  });
+
+  return option;
+}
+
+// --------------------------------------------------------------------------
+// Handle Keystrokes
+// --------------------------------------------------------------------------
+Selectron.prototype.handleKeyStrokes = function(e) {
+  var hovered = this.options.find('.selectron__option--is-hovered'),
+      enterKeyPressed = e.which === 13,
+      spaceKeyPressed = e.which === 32,
+      upArrowKeyPressed = e.which === 38,
+      downArrowKeyPressed = e.which === 40,
+      alphaNumbericKeyPressed = (e.which >= 48 && e.which <= 57) || (e.which >= 65 && e.which <= 90) || e.which === 8,
+      self = this;
+
+  if(!this.isOpen && (upArrowKeyPressed || downArrowKeyPressed || enterKeyPressed)) {
+    return false;
+  }
+
+  if(enterKeyPressed) {
+    this.closeOptions();
+    this.updateSelection(hovered);
+  }
+
+  if(spaceKeyPressed) {
+    if(this.searchTerm === "") {
+      if(!this.isOpen) {
+        this.openOptions();
+      } else {
+        this.closeOptions();
+        this.updateSelection(hovered);
+      }
+    }
+  }
+
+  if(upArrowKeyPressed || downArrowKeyPressed) {
+    var nextElement;
+
+    if(downArrowKeyPressed) {
+        nextElement = hovered.is(':last-child') ? this.options.find('.selectron__option:first-child') : hovered.next();
+        if(nextElement.hasClass('selectron__option-group')) {
+          nextElement = nextElement.next();
+        }
+    } else if(upArrowKeyPressed) {
+        nextElement = hovered.is(':first-child') ? this.options.find('.selectron__option:last-child') : hovered.prev();
+        if(nextElement.hasClass('selectron__option-group')) {
+          nextElement = nextElement.prev();
+        }
+    }
+
+    this.updateHover(nextElement);
+  }
+
+  if(alphaNumbericKeyPressed || spaceKeyPressed) {
+    clearTimeout(this.searchTimeout);
+    
+    this.searchTimeout = setTimeout(function() {
+      self.clearSearchTerm();
+    }, 500);
+    this.searchTerm += String.fromCharCode(e.which).toLowerCase();
+    console.log(this.searchTerm);
+    optCount = this.options.find('li').length + 1;
+    for(var i = 1; i < optCount; i ++) {
+      var current = this.options.find('.selectron__option:nth-child(' + i + ')'),
+          text = current.text().toLowerCase();
+      if(text.indexOf(this.searchTerm) >= 0 && !this.placeholderExists || text.indexOf(this.searchTerm) >= 0 && this.placeholderExists && !current.is(':first-child')) {
+        current.addClass('selectron__option--is-hovered').siblings().removeClass('selectron__option--is-hovered');
+        if(!this.isOpen) {
+          this.updateSelection(hovered);
+        }
+        return;
+      }
+    }
+  }
+
+}
+
+// --------------------------------------------------------------------------
+// Open Options
+// --------------------------------------------------------------------------
+Selectron.prototype.openOptions = function() {
+  if(!this.isDisabled) {
+    this.options.addClass('selectron__options--is-open');
+    this.trigger.addClass('selectron__trigger--is-open');
+    this.isOpen = true;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Populate Options
+// --------------------------------------------------------------------------
+Selectron.prototype.populateOptions = function() {
+  var self = this,
+      selectCildren = self.select.children();
+
+  selectCildren.each(function() {
+    var child = $(this),
+        isOptGroup = child.is('optgroup');
+
+    if(isOptGroup) {
+      var groupOptions = child.children(),
+          content = child.attr('label'),
+          optionGroup = $('<li class="selectron__option-group">' + content + '</li>');
+
+      self.options.append(optionGroup);
+      groupOptions.each(function() {
+        var groupOption = $(this);
+        self.options.append(self.createOption(groupOption, true));
+      });
+    } else {
+      self.options.append(self.createOption(child, false));
+    }
+  });
+
+  var firstOption = this.options.find('.selectron__option:first');
+  firstOption.addClass('selectron__option--is-hovered');
+  this.placeholderExists = firstOption.data('value') === '';
+
+  this.updateTrigger();
+};
+
+// --------------------------------------------------------------------------
+// Register Events
+// --------------------------------------------------------------------------
+Selectron.prototype.registerEvents = function() {
+  var self = this;
+
+  this.trigger.on({
+    'click': function(e) {
+      self.toggleOptions(e);
+    },
+    'keyup': function(e) {
+      self.handleKeyStrokes(e);
+    },
+    'keydown': function(e) {
+      e.preventDefault();
+    },
+    'blur': function() {
+      self.closeOptions();
+    }
+  });
+
+  this.select.on({
+    'selectron.update': function() {
+      self.options.empty();
+      self.populateOptions();
+    },
+    'change': function() {
+      self.updateValue($(this).val());
+    }
+  });
+
+  this.options.on({
+    'mouseenter': function() {
+      self.optionsAreHovered = true;
+    },
+    'mouseleave': function() {
+      self.optionsAreHovered = false;
+    }
+  });
+};
+
+// --------------------------------------------------------------------------
+// Toggle Options
+// --------------------------------------------------------------------------
+Selectron.prototype.toggleOptions = function(e) {
+  e.stopPropagation();
+  if(!this.isDisabled) {
+    this.options.toggleClass('selectron__options--is-open');
+    this.isOpen = this.trigger.toggleClass('selectron__trigger--is-open').hasClass('selectron__trigger--is-open');
+  } 
+};
+
+// --------------------------------------------------------------------------
+// Update Hover
+// --------------------------------------------------------------------------
+Selectron.prototype.updateHover = function(hovered) {
+  var listHeight = this.options.height(),
+      optionTop = hovered.position().top,
+      optionHeight = hovered.outerHeight(),
+      scrollPosition = this.options.scrollTop();
+
+  hovered.addClass('selectron__option--is-hovered').siblings().removeClass('selectron__option--is-hovered');
+
+  if(hovered.is(':first-child')) {
+      this.options.scrollTop(0);
+  } else if(hovered.is(':last-child')) {
+      this.options.scrollTop(this.options[0].scrollHeight);
+  } else if(optionTop > (listHeight - optionHeight)) {
+      this.options.scrollTop(optionTop + (scrollPosition - (listHeight - optionHeight)));
+  } else if(optionTop < optionHeight) {
+      this.options.scrollTop(optionTop + scrollPosition);
+  }
+}
+
+// --------------------------------------------------------------------------
+// Update Selection
+// --------------------------------------------------------------------------
+Selectron.prototype.updateSelection = function(selected) {
+  var value = selected.data('value');
+  selected.addClass('selectron__option--is-selected').siblings().removeClass('selectron__option--is-selected');
+  this.updateTrigger();
+  this.select.val(value).trigger('selectron.change');
+}
+
+// --------------------------------------------------------------------------
+// Update Trigger
+// --------------------------------------------------------------------------
+Selectron.prototype.updateTrigger = function() {
+  var selected = this.options.find('.selectron__option--is-selected'),
+      content = selected.text(),
+      value = selected.data('value'),
+      isPlaceholder = value === "" ? true : false;
+
+  this.trigger.html(content);
+  this.trigger.toggleClass('selectron__trigger--is-filled', !isPlaceholder);
+  this.optionsAreHovered = false;
+  this.closeOptions();
+}
+
+// --------------------------------------------------------------------------
+// Update Value
+// --------------------------------------------------------------------------
+Selectron.prototype.updateValue = function(value) {
+  this.options.find('[data-value="' + value + '"]').addClass('selectron__option--is-selected').siblings().removeClass('selectron__option--is-selected');
+  this.updateTrigger();
+}

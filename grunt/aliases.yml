@@ -1,10 +1,12 @@
 default:
   - 'clean'
   - 'concat'
+  - 'sass'
   - 'copy'
 
 development:
   - 'clean'
   - 'concat'
+  - 'sass'
   - 'copy'
   - 'watch'

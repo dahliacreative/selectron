@@ -9,7 +9,7 @@ module.exports = {
   },
   js: {
     files: ['src/javascripts/*.js'],
-    tasks: ['concat', 'uglify'],
+    tasks: ['concat', 'copy'],
     options: {
       spawn: false,
       livereload: true

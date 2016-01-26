@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    <title>Selectron.js</title>
+    <link rel="stylesheet" href="selectron.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="selectron.js"></script>
+  </head>
+
+  <body>
+    <select class="selectron">
+      <option value="">Please select something</option>
+      <optgroup label="Cool People">
+        <option value="Max">Max</option>
+        <option value="Miles">Miles</option>
+        <option value="Millie">Millie</option>
+      </optgroup>
+      <optgroup label="Not Cool People">
+        <option value="Other">Everyone Else</option>
+      </optgroup>
+    </select>
+
+    <script>
+    $('.selectron').selectron();
+    </script>
+  </body>
+
+</html>
