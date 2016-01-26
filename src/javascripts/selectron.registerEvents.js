@@ -21,11 +21,11 @@ Selectron.prototype.registerEvents = function() {
 
   this.select.on({
     'selectron.update': function() {
-      this.options.empty();
-      this.populateOptions();
+      self.options.empty();
+      self.populateOptions();
     },
     'change': function() {
-      this.updateValue($(this).val());
+      self.updateValue($(this).val());
     }
   });
 

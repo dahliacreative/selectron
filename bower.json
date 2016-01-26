@@ -1,0 +1,30 @@
+{
+  "name": "selectron",
+  "version": "1.0.0",
+  "description": "An accessible jQuery custom select, styled with sass for easy customization",
+  "homepage": "https://github.com/dahliacreative/selectron",
+  "authors": [
+    "Simon Sturgess - @dahliacreative"
+  ],
+  "keywords": [
+    "jQuery",
+    "select",
+    "custom",
+    "accessible"
+  ],
+  "license": "MIT",
+  "main": [
+    "dist/selectron.js",
+    "dist/selectron.sass"
+  ],
+  "dependencies": {
+    "jquery": ">=1.7"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

@@ -250,11 +250,11 @@ Selectron.prototype.registerEvents = function() {
 
   this.select.on({
     'selectron.update': function() {
-      this.options.empty();
-      this.populateOptions();
+      self.options.empty();
+      self.populateOptions();
     },
     'change': function() {
-      this.updateValue($(this).val());
+      self.updateValue($(this).val());
     }
   });
 
@@ -324,4 +324,12 @@ Selectron.prototype.updateTrigger = function() {
   this.trigger.toggleClass('selectron__trigger--is-filled', !isPlaceholder);
   this.optionsAreHovered = false;
   this.closeOptions();
+}
+
+// --------------------------------------------------------------------------
+// Update Value
+// --------------------------------------------------------------------------
+Selectron.prototype.updateValue = function(value) {
+  this.options.find('[data-value="' + value + '"]').addClass('selectron__option--is-selected').siblings().removeClass('selectron__option--is-selected');
+  this.updateTrigger();
 }
