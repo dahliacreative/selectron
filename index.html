@@ -8,6 +8,7 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="app/stylesheets/application.css"/>
     <link rel="stylesheet" href="app/stylesheets/selectron.css"/>
+    <link rel="stylesheet" href="app/stylesheets/highlight.css"/>
   </head>
   <body>
 
@@ -89,7 +90,7 @@
           <div class="well">
             <p>Selectron has been written to be easily customized using Sass variables. To overwrite the defaults simply define your variables before the inclusion of <code>selectron.sass</code>.</p>
             <p>SASS VARIABLES</p>
-            <pre><code>$selectron-border-radius:           4px !default
+            <pre><code class="css">$selectron-border-radius:           4px !default
 $selectron-color-background-dark:   #363636 !default
 $selectron-color-background-light:  #ffffff !default
 $selectron-color-brand:             #f70c36 !default
@@ -136,6 +137,7 @@ $selectron-height:                  50px !default</code></pre>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="app/javascript/selectron.js"></script>
+    <script src="app/javascript/highlight.js"></script>
     <script>
       $(function() {
         var win = $(window),
@@ -152,6 +154,8 @@ $selectron-height:                  50px !default</code></pre>
           var hide = win.scrollTop() > 30;
           more.toggleClass('hide', hide);
         });
+
+        hljs.initHighlightingOnLoad();
       });
       
     </script>
