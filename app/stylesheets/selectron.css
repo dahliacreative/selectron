@@ -73,7 +73,7 @@
 .selectron--is-touch:after,
 .selectron__trigger:before,
 .selectron__trigger:after {
-    background-color: #c40d41;
+    background-color: #cd004b;
     content: "";
     height: 2px;
     position: absolute;
@@ -137,14 +137,14 @@
 }
 .selectron__option--is-selected {
     background-color: transparent;
-    color: #c40d41
+    color: #cd004b
 }
 .selectron__option--is-disabled,
 .selectron__option[data-value=""] {
     color: #ccc
 }
 .selectron__option--is-hovered {
-    background-color: #c40d41;
+    background-color: #cd004b;
     color: #fff !important
 }
 .selectron__option-group {
