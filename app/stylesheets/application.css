@@ -19,18 +19,24 @@ body {
 }
 
 .heading {
-  font-size: 22px;
+  font-size: 18px;
   font-weight: normal;
-  margin: 0 0 20px;
+  margin: 0;
   font-weight: 300;
   line-height: 1;
   text-transform: uppercase;
-  letter-spacing: 1px
+  letter-spacing: 1px;
+  background-color: rgba(0,0,0,0.5);
+  padding: 15px 20px;
 }
 
 .well {
-  padding: 50px;
+  padding: 30px;
   background-color: rgba(0,0,0,0.2);
+}
+
+.well >*:first-child {
+  margin-top: 0;
 }
 
 .sr-only {
@@ -205,4 +211,10 @@ section.home {
 pre {
   display: block;
   overflow: auto;
+  padding: 20px;
+  background-color: rgba(0,0,0,0.2);
+}
+
+pre:last-child {
+  margin-bottom: 0;
 }
