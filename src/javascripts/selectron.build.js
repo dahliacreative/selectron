@@ -2,16 +2,16 @@
 // Build the DOM
 // --------------------------------------------------------------------------
 Selectron.prototype.build = function() {
+  var wrapperClasses = this.select.attr('class');
   this.wrapper = $('<div class="selectron"/>');
-
-  this.select
-    .removeClass('selectron selectron--dark')
-    .addClass('selectron__select');
-
   this.wrapper
-    .toggleClass('selectron--dark', this.darkTheme)
+    .addClass(wrapperClasses)
     .toggleClass('selectron--disabled', this.isDisabled)
     .toggleClass('selectron--is-touch', this.isTouch);
+
+  this.select
+    .removeAttr('class')
+    .addClass('selectron__select');
 
   this.select.replaceWith(this.wrapper);
 

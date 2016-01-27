@@ -33,6 +33,5 @@ var Selectron = function (select) {
   }
   this.isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
   this.isDisabled = select.prop('disabled');
-  this.darkTheme = select.hasClass('selectron--dark');
   this.select = select;
 };
