@@ -46,6 +46,7 @@ Selectron.prototype.handleKeyStrokes = function(e) {
     }
 
     this.updateHover(nextElement);
+    this.updateScrollPosition(nextElement);
   }
 
   if(alphaNumbericKeyPressed || spaceKeyPressed) {
