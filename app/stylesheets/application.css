@@ -2,6 +2,7 @@ html, body {
   height: 100%;
 }
 
+
 html {
   background: #e7163c;
   background: -moz-linear-gradient(-45deg,  #e7163c 0%, #9c0346 100%);
@@ -18,11 +19,13 @@ body {
 }
 
 .heading {
-  font-family: 'Satisfy', cursive;
-  font-size: 60px;
+  font-size: 22px;
   font-weight: normal;
-  margin: -50px 0 -15px;
+  margin: 0 0 20px;
+  font-weight: 300;
   line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 1px
 }
 
 .well {
@@ -41,6 +44,51 @@ body {
   padding: 0;
 }
 
+.more {
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: none;
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  padding-bottom: 30px;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+  transition: opacity 0.5s;
+}
+
+.more.hide {
+  opacity: 0;
+}
+
+.more:before,
+.more:after {
+    background-color: #fff;
+    content: "";
+    height: 2px;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 10px;
+    margin-left: -5px;
+}
+
+.more:before {
+    -webkit-transform: rotate(-45deg) translateX(50%);
+    -ms-transform: rotate(-45deg) translateX(50%);
+    -o-transform: rotate(-45deg) translateX(50%);
+    transform: rotate(-45deg) translateX(50%)
+}
+
+.more:after {
+    -webkit-transform: rotate(45deg) translateX(-50%);
+    -ms-transform: rotate(45deg) translateX(-50%);
+    -o-transform: rotate(45deg) translateX(-50%);
+    transform: rotate(45deg) translateX(-50%)
+}
+
 section {
   -ms-align-items: center;
   align-items: center;
@@ -49,14 +97,27 @@ section {
   display: -ms-flex;
   display: -o-flex;
   display: flex;
-  height: 100%;
   justify-content: center;
+}
+section.home {
+  height: 100%;
+  background: #e7163c;
+  background: -moz-linear-gradient(-45deg,  #e7163c 0%, #9c0346 100%);
+  background: -webkit-linear-gradient(-45deg,  #e7163c 0%,#9c0346 100%);
+  background: linear-gradient(135deg,  #e7163c 0%,#9c0346 100%);
+  background-attachment: fixed;
+}
+
+.section {
+  margin-bottom: 100px;
+  margin-top: 100px;
 }
 
 .content {
   max-width: 680px;
   padding: 0 10px;
   width: 100%;
+  margin: 0 auto;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -89,70 +150,6 @@ section {
   -ms-flex: 1;
   -o-flex: 1;
   flex: 1;
-}
-
-nav {
-  position: fixed;
-  top: 50%;
-  right: 30px;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
-
-@media(max-width: 819px) {
-  nav {
-    -webkit-transform: translate(-50%, 0);
-    -ms-transform: translate(-50%, 0);
-    -o-transform: translate(-50%, 0);
-    transform: translate(-50%, 0);
-    right: auto;
-    left: 50%;
-    top: auto;
-    bottom: 30px;
-  }
-  .dots {
-    display: -webkit-flex;
-    display: -moz-flex;
-    display: -ms-flex;
-    display: -o-flex;
-    display: flex;
-  }
-  .dots li {
-    margin: 0 5px 0 0 !important;
-  }
-  .dots li:last-child {
-    margin-right: 0;
-  }
-}
-
-.dots {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.dots li {
-  margin-bottom: 5px;
-}
-
-.dots li:last-child {
-  margin-bottom: 0;
-}
-
-.dots a {
-  display: block;
-  width: 0;
-  height: 10px;
-  padding-left: 10px;
-  overflow: hidden;
-  border-radius: 50%;
-  border: 1px solid #fff;
-}
-
-.dots a.selected {
-  background-color: #fff;
 }
 
 .intro .github {
@@ -195,6 +192,9 @@ nav {
   .intro .github {
     padding: 20px;
     padding-left: 0;
+  }
+  .well {
+    padding: 20px;
   }
 }
 

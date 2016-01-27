@@ -5,9 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
     <meta name="viewport" content="width=device-width initial-scale=1.0"/>
     <title>Selectron</title>
-    <link href='https://fonts.googleapis.com/css?family=Satisfy|Open+Sans' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="app/stylesheets/application.css"/>
     <link rel="stylesheet" href="app/stylesheets/selectron.css"/>
+    <link rel="stylesheet" href="app/stylesheets/pagepiling.css"/>
   </head>
   <body>
 
@@ -16,91 +17,80 @@
     <p>An accessible jQuery custom select, styled with sass for easy customization</p>
   </header>
 
-  <nav>
-    <ul class="dots">
-      <li><a href="#home" class="selected">Home</a></li>
-      <li><a href="#installation">Installation</a></li>
-      <li><a href="#usage">Usage</a></li>
-      <li><a href="#themes">Themes</a></li>
-      <li><a href="#customisation">Customisation</a></li>
-      <li><a href="#events">Events</a></li>
-      <li><a href="#methods">Methods</a></li>
-    </ul>
-  </nav>
-
-    <section class="section" data-section-name="home">
-      <div class="content">
-        <h2 class="sr-only">See it in action</h2>
-        <div class="intro">
-          <div class="logo"><img src="app/images/logo.svg" alt="Selectron"></div>
-          <div class="select">
-            <select class="selectron">
-              <option value="">Select something</option>
-              <optgroup label="First Option Group">
-                <option value="1">Option One</option>
-                <option value="2">Option Two</option>
-                <option value="3">Option Three</option>
-              </optgroup>
-              <optgroup label="Second Option Group">
-                <option value="4">Option Four</option>
-                <option value="5">Option Five</option>
-                <option value="6">Option Six</option>
-              </optgroup>
-            </select>
-          </div>
-          <div class="github">
-            <a href="https://github.com/dahliacreative/selectron">View on github</a>
+      <section class="home">
+        <div class="content">
+          <h2 class="sr-only">See it in action</h2>
+          <div class="intro">
+            <div class="logo"><img src="app/images/logo.svg" alt="Selectron"></div>
+            <div class="select">
+              <select class="selectron">
+                <option value="">Select something</option>
+                <optgroup label="First Option Group">
+                  <option value="1">Option One</option>
+                  <option value="2">Option Two</option>
+                  <option value="3">Option Three</option>
+                </optgroup>
+                <optgroup label="Second Option Group">
+                  <option value="4">Option Four</option>
+                  <option value="5">Option Five</option>
+                  <option value="6">Option Six</option>
+                </optgroup>
+              </select>
+            </div>
+            <div class="github">
+              <a href="https://github.com/dahliacreative/selectron">View on github</a>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section class="section" data-section-name="installation">
-      <div class="content">
-        <h2 class="heading">Installation</h2>
-        <div class="well">
-          <pre><code>bower install --save selectron</code></pre>
+        <a href="#" class="more">Get Started</a>
+      </section>
+      
+      <section class="section">
+        <div class="content">
+          <h2 class="heading">Installation</h2>
+          <div class="well">
+            <pre><code>bower install --save selectron</code></pre>
+          </div>
         </div>
-      </div>
-    </section>
-
-    <section class="section" data-section-name="usage">
-      <div class="content">
-        <h2 class="heading">Usage</h2>
-        <div class="well">
-          <p>HTML</p>
-          <pre><code>&lt;select class=&quot;selectron&quot;&gt;
+      </section>
+      
+      <section class="section">
+        <div class="content">
+          <h2 class="heading">Usage</h2>
+          <div class="well">
+            <p>HTML</p>
+            <pre><code>&lt;select class=&quot;selectron&quot;&gt;
   &lt;option value=&quot;&quot;&gt;Please select something&lt;/option&gt;
   &lt;option value=&quot;1&quot;&gt;Option 1&lt;/option&gt;
   &lt;option value=&quot;2&quot;&gt;Option 2&lt;/option&gt;
 &lt;/select&gt;</code></pre>
-          <p>JS</p>
-          <pre><code>$('.selectron').selectron();</code></pre>
+            <p>JS</p>
+            <pre><code>$('.selectron').selectron();</code></pre>
+          </div>
         </div>
-      </div>
-    </section>
-
-    <section class="section" data-section-name="themes">
-      <div class="content">
-        <h2 class="heading">Themes</h2>
-        <div class="well">
-          <p>There are two default themes, light and dark. The light theme is applied by default, to apply the dark theme simply add the <code>selectron--dark</code> class to your select.</p>
-          <pre><code>&lt;select class=&quot;selectron selectron--dark&quot;&gt;
+      </section>
+      
+      <section class="section">
+        <div class="content">
+          <h2 class="heading">Themes</h2>
+          <div class="well">
+            <p>There are two default themes, light and dark. The light theme is applied by default, to apply the dark theme simply add the <code>selectron--dark</code> class to your select.</p>
+            <pre><code>&lt;select class=&quot;selectron selectron--dark&quot;&gt;
   &lt;option value=&quot;&quot;&gt;Please select something&lt;/option&gt;
   &lt;option value=&quot;1&quot;&gt;Option 1&lt;/option&gt;
   &lt;option value=&quot;2&quot;&gt;Option 2&lt;/option&gt;
 &lt;/select&gt;</code></pre>
+          </div>
         </div>
-      </div>
-    </section>
-
-    <section class="section" data-section-name="customisation">
-      <div class="content">
-        <h2 class="heading">Customisation</h2>
-        <div class="well">
-          <p>Selectron has been written to be easily customized using Sass variables. To overwrite the defaults simply define your variables before the inclusion of <code>selectron.sass</code>.</p>
-          <p>SASS VARIABLES</p>
-          <pre><code>$selectron-border-radius:           4px !default
+      </section>
+      
+      <section class="section">
+        <div class="content">
+          <h2 class="heading">Customisation</h2>
+          <div class="well">
+            <p>Selectron has been written to be easily customized using Sass variables. To overwrite the defaults simply define your variables before the inclusion of <code>selectron.sass</code>.</p>
+            <p>SASS VARIABLES</p>
+            <pre><code>$selectron-border-radius:           4px !default
 $selectron-color-background-dark:   #363636 !default
 $selectron-color-background-light:  #ffffff !default
 $selectron-color-brand:             #f70c36 !default
@@ -114,54 +104,55 @@ $selectron-padding:                 17px 50px 18px 18px !default
 $selectron-option-padding:          13px 18px 14px !default
 $selectron-optgroup-padding:        13px 18px 14px 28px !default
 $selectron-height:                  50px !default</code></pre>
+          </div>
         </div>
-      </div>
-    </section>
-
-    <section class="section" data-section-name="events">
-      <div class="content">
-        <h2 class="heading">Events</h2>
-        <div class="well">
-          <p>Selectron triggers a <code>selectron.change</code> event on the original <code>select</code> for you to listen to. This allows you to change the value of the <code>select</code> dynamically and trigger a <code>change</code> event, which in turn will update selectron.</p>
-          <p>JS</p>
-          <pre><code>$('select').on('selectron.change', function() {
+      </section>
+      
+      <section class="section">
+        <div class="content">
+          <h2 class="heading">Events</h2>
+          <div class="well">
+            <p>Selectron triggers a <code>selectron.change</code> event on the original <code>select</code> for you to listen to. This allows you to change the value of the <code>select</code> dynamically and trigger a <code>change</code> event, which in turn will update selectron.</p>
+            <p>JS</p>
+            <pre><code>$('select').on('selectron.change', function() {
   // Do something here;
 });</code></pre>
+          </div>
         </div>
-      </div>
-    </section>
-
-    <section class="section" data-section-name="methods">
-      <div class="content">
-        <h2 class="heading">Methods</h2>
-        <div class="well">
-          <p>Selectron provides an <code>selectron.update</code> method which when triggered on the original <code>select</code> will re-populate the options.</p>
-          <p>JS</p>
-          <pre><code>$('select')
+      </section>
+      
+      <section class="section">
+        <div class="content">
+          <h2 class="heading">Methods</h2>
+          <div class="well">
+            <p>Selectron provides an <code>selectron.update</code> method which when triggered on the original <code>select</code> will re-populate the options.</p>
+            <p>JS</p>
+            <pre><code>$('select')
   .append('&lt;option value=&quot;val&quot;&gt;Some option&lt;/option&gt;')
   .trigger('selectron.update');</code></pre>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="app/javascript/selectron.js"></script>
-    <script src="app/javascript/scrollify.js"></script>
+    <script src="app/javascript/pagepiling.js"></script>
     <script>
       $(function() {
+        var win = $(window),
+            more = $('.more');
+
         $('.selectron').selectron();
-        $.scrollify({
-          section : ".section",
-          scrollbars: false,
-          before: function(i) {
-            $('.selected').removeClass('selected');
-            $('.dots li:nth-child('+ (i+1) +') a').addClass('selected');
-          }
-        });
-        $('.dots a').on('click', function() {
-          var target = $(this).attr('href');
-          $.scrollify.move(target);
+
+        more.on('click', function() {
+          $('html, body').animate({scrollTop: $(window).height()}, 500);
           return false;
+        });
+
+        win.scroll(function() {
+          var hide = win.scrollTop() > 30;
+          more.toggleClass('hide', hide);
         });
       });
       
