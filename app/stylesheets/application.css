@@ -211,10 +211,13 @@ section.home {
 pre {
   display: block;
   overflow: auto;
-  padding: 20px;
   background-color: rgba(0,0,0,0.2);
 }
 
 pre:last-child {
   margin-bottom: 0;
+}
+
+code {
+  padding: 15px;
 }
