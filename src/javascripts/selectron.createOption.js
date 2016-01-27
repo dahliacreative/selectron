@@ -1,3 +1,6 @@
+// --------------------------------------------------------------------------
+// Create option
+// --------------------------------------------------------------------------
 Selectron.prototype.createOption = function(selectOption, isInGroup) {
   var value = selectOption.val(),
       content = selectOption.text(),
