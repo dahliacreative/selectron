@@ -2,6 +2,8 @@ html, body {
   height: 100%;
 }
 
+::-moz-selection { background: #9f0053; color: #fff; }
+::selection { background: #9f0053; color: #fff; }
 
 html {
   background: #f10c48;
