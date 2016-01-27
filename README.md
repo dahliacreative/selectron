@@ -28,7 +28,7 @@ $('.selectron').selectron();
 ```
 
 ##Themes
-There are two default themes, light and dark. The light theme is applied by default, to apply the dark theme simply add the `selectron--dark` class to your select.
+There are two default themes, light and dark. The light theme is applied by default, to apply the dark theme simply add the `selectron--dark` class to your select, or any other class you want to be added to selectron.
 ```
 <select class="selectron selectron--dark">
   <option value="">Please select something</option>
