@@ -7,7 +7,7 @@ _An accessible jQuery custom select, styled with sass for easy customization_
 
 ###Bower
 ```
-bower install --save selectron
+bower install --save jquery-selectron
 ```
 
 ##Usage
