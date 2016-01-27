@@ -77,12 +77,15 @@ Selectron.prototype.clearSearchTerm = function() {
 // --------------------------------------------------------------------------
 Selectron.prototype.closeOptions = function() {
   if(!this.optionsAreHovered) {
-    this.options.removeClass('selectron__options--is-open');
+    this.options.removeClass('selectron__options--is-open selectron__options--is-overflowing');
     this.trigger.removeClass('selectron__trigger--is-open');
     this.isOpen = false;
   }
 }
 
+// --------------------------------------------------------------------------
+// Create option
+// --------------------------------------------------------------------------
 Selectron.prototype.createOption = function(selectOption, isInGroup) {
   var value = selectOption.val(),
       content = selectOption.text(),
@@ -188,8 +191,20 @@ Selectron.prototype.handleKeyStrokes = function(e) {
 // --------------------------------------------------------------------------
 Selectron.prototype.openOptions = function() {
   if(!this.isDisabled) {
-    this.options.addClass('selectron__options--is-open');
-    this.trigger.addClass('selectron__trigger--is-open');
+    var win = $(window),
+        optionsBottom = this.options.offset().top + this.options.height(),
+        scrollPosition = win.scrollTop(),
+        windowHeight = win.height(),
+        isOverflowing = optionsBottom > (windowHeight - scrollPosition);
+
+    this.options
+      .addClass('selectron__options--is-open')
+      .toggleClass('selectron__options--is-overflowing', isOverflowing);
+
+    this.trigger
+      .addClass('selectron__trigger--is-open')
+      .toggleClass('selectron__trigger--is-overflowing', isOverflowing);
+
     this.isOpen = true;
   }
 }
@@ -274,8 +289,20 @@ Selectron.prototype.registerEvents = function() {
 Selectron.prototype.toggleOptions = function(e) {
   e.stopPropagation();
   if(!this.isDisabled) {
-    this.options.toggleClass('selectron__options--is-open');
-    this.isOpen = this.trigger.toggleClass('selectron__trigger--is-open').hasClass('selectron__trigger--is-open');
+    var win = $(window),
+        optionsBottom = this.options.offset().top + this.options.height(),
+        scrollPosition = win.scrollTop(),
+        windowHeight = win.height(),
+        isOverflowing = optionsBottom > (windowHeight - scrollPosition);
+
+    this.options
+      .toggleClass('selectron__options--is-open')
+      .toggleClass('selectron__options--is-overflowing', isOverflowing);
+
+    this.trigger.toggleClass('selectron__trigger--is-open')
+      .toggleClass('selectron__trigger--is-overflowing', isOverflowing);
+
+    this.isOpen = this.trigger.hasClass('selectron__trigger--is-open');
   } 
 };
 
