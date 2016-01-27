@@ -2,7 +2,6 @@
 -------
 _An accessible jQuery custom select, styled with sass for easy customization_
 
-## Demo
 [http://dahliacreative.github.io/selectron/](http://dahliacreative.github.io/selectron/)
 
 
