@@ -220,6 +220,17 @@ pre:last-child {
   margin-bottom: 0;
 }
 
+p > code {
+  background: rgba(0,0,0,0.1);
+  color: #f69f9f;
+  display: inline-block;
+  padding: 0 8px 2px;
+}
+
+p {
+  line-height: 1.6;
+}
+
 code {
   padding: 15px;
 }
