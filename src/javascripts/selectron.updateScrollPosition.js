@@ -13,6 +13,5 @@ Selectron.prototype.updateScrollPosition = function(hovered) {
       this.options.scrollTop(this.options[0].scrollHeight);
   } else if(optionTop > (listHeight - optionHeight)) {
       this.options.scrollTop(optionTop - (listHeight - optionHeight));
-      console.log('bottom')
   } 
 }

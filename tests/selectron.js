@@ -169,7 +169,6 @@ Selectron.prototype.handleKeyStrokes = function(e) {
       self.clearSearchTerm();
     }, 500);
     this.searchTerm += String.fromCharCode(e.which).toLowerCase();
-    console.log(this.searchTerm);
     optCount = this.options.find('li').length + 1;
     for(var i = 1; i < optCount; i ++) {
       var current = this.options.find('.selectron__option:nth-child(' + i + ')'),
@@ -328,7 +327,6 @@ Selectron.prototype.updateScrollPosition = function(hovered) {
       this.options.scrollTop(this.options[0].scrollHeight);
   } else if(optionTop > (listHeight - optionHeight)) {
       this.options.scrollTop(optionTop - (listHeight - optionHeight));
-      console.log('bottom')
   } 
 }
 // --------------------------------------------------------------------------
