@@ -20,19 +20,27 @@
 // --------------------------------------------------------------------------
 
 $selectron-border-radius:           4px !default
+$selectron-border-width:            1px !default
 $selectron-color-background-dark:   #363636 !default
 $selectron-color-background-light:  #ffffff !default
 $selectron-color-brand:             #f70c36 !default
-$selectron-color-font:              #666666 !default
-$selectron-color-light:             #999999 !default
+
+$selectron-color-font-dark:         #666666 !default
+$selectron-color-font-light:        #999999 !default
 $selectron-font-family:             sans-serif !default
 $selectron-font-size:               13px !default
+
 $selectron-max-width:               400px !default
 $selectron-min-width:               200px !default
+$selectron-height:                  50px !default
+
 $selectron-padding:                 17px 50px 18px 18px !default
 $selectron-option-padding:          13px 18px 14px !default
 $selectron-optgroup-padding:        13px 18px 14px 28px !default
-$selectron-height:                  50px !default
+
+$selectron-arrow-border-width:      2px !default
+$selectron-arrow-border-radius:     0px !default
+$selectron-arrow-size:              10px !default
 
 
 // --------------------------------------------------------------------------
@@ -40,7 +48,7 @@ $selectron-height:                  50px !default
 // --------------------------------------------------------------------------
 
 .selectron
-  color: $selectron-color-font
+  color: $selectron-color-font-dark
   display: inline-block
   font-family: $selectron-font-family
   font-size: $selectron-font-size
@@ -58,7 +66,7 @@ $selectron-height:                  50px !default
   &--is-touch &
     
     &__select
-      color: $selectron-color-font
+      color: $selectron-color-font-dark
       font-family: $selectron-font-family
       font-size: $selectron-font-size
       font-size: $selectron-font-size
@@ -95,9 +103,9 @@ $selectron-height:                  50px !default
   &__trigger
     background-color: $selectron-color-background-light
     border-radius: $selectron-border-radius
-    border: 1px solid lighten($selectron-color-light, 20%)
+    border: $selectron-border-width solid lighten($selectron-color-font-light, 20%)
     box-sizing: border-box
-    color: lighten($selectron-color-font, 30%)
+    color: lighten($selectron-color-font-dark, 30%)
     cursor: pointer
     font-size: $selectron-font-size
     height: $selectron-height
@@ -112,42 +120,34 @@ $selectron-height:                  50px !default
     width: 100%
 
     &--is-filled
-      color: $selectron-color-font
+      color: $selectron-color-font-dark
 
     &--is-open
-      border-color: $selectron-color-light
+      border-color: $selectron-color-font-light
       border-radius: $selectron-border-radius $selectron-border-radius 0 0
-      color: $selectron-color-font
+      color: $selectron-color-font-dark
 
     &--is-overflowing
       border-radius: 0 0 $selectron-border-radius $selectron-border-radius
 
     &:focus
-      border-color: $selectron-color-light
-
-    &:before,
-    &:after
-      background-color: $selectron-color-brand
-      content: ""
-      height: 2px
-      position: absolute
-      top: 50%
-      width: 10px
-
+      border-color: $selectron-color-font-light
 
     &:before
-      right: 17px
-      -webkit-transform: rotate(-45deg) translateY(-50%)
-      -ms-transform: rotate(-45deg) translateY(-50%)
-      -o-transform: rotate(-45deg) translateY(-50%)
-      transform: rotate(-45deg) translateY(-50%)
-      
-    &:after
-      right: 25px
-      -webkit-transform: rotate(45deg) translateY(-50%)
-      -ms-transform: rotate(45deg) translateY(-50%)
-      -o-transform: rotate(45deg) translateY(-50%)
-      transform: rotate(45deg) translateY(-50%)
+      content: ""
+      border-bottom: $selectron-arrow-border-width solid $selectron-color-brand
+      border-left: $selectron-arrow-border-width solid $selectron-color-brand
+      height: $selectron-arrow-size
+      border-radius: 0 0 0 $selectron-arrow-border-radius
+      width: $selectron-arrow-size
+      position: absolute
+      top: 50%
+      right: calc(20px - #{$selectron-arrow-border-width * 2})
+      margin-top: -#{$selectron-arrow-border-width / 2}
+      -webkit-transform: rotate(-45deg) translate(50%, -50%)
+      -ms-transform: rotate(-45deg) translate(50%, -50%)
+      -o-transform: rotate(-45deg) translate(50%, -50%)
+      transform: rotate(-45deg) translate(50%, -50%)
 
 
   // ------------------------------------------------------------------------
@@ -157,7 +157,7 @@ $selectron-height:                  50px !default
   &__options
     background-color: #fff
     border-radius: 0 0 $selectron-border-radius $selectron-border-radius
-    border: 1px solid $selectron-color-light
+    border: $selectron-border-width solid $selectron-color-font-light
     border-top: none
     box-sizing: border-box
     left: 0
@@ -181,7 +181,7 @@ $selectron-height:                  50px !default
     &--is-overflowing
       border-bottom: none
       border-radius: $selectron-border-radius $selectron-border-radius 0 0
-      border-top: 1px solid $selectron-color-light
+      border-top: $selectron-border-width solid $selectron-color-font-light
       bottom: 100%
       top: auto
 
@@ -207,7 +207,7 @@ $selectron-height:                  50px !default
 
     &--is-disabled,
     &[data-value=""]
-      color: lighten($selectron-color-font, 40%)
+      color: lighten($selectron-color-font-dark, 40%)
 
     &--is-hovered
       background-color: $selectron-color-brand
@@ -219,7 +219,7 @@ $selectron-height:                  50px !default
   // ------------------------------------------------------------------------
 
   &__option-group
-    color: $selectron-color-light
+    color: $selectron-color-font-light
     cursor: default
     padding: $selectron-option-padding
 
@@ -240,7 +240,7 @@ $selectron-height:                  50px !default
       &__trigger
         background-color: $selectron-color-background-dark
         border: none
-        color: $selectron-color-font
+        color: $selectron-color-font-dark
 
         &--is-filled
           color: #fff
@@ -269,7 +269,7 @@ $selectron-height:                  50px !default
       &__option
 
         &[data-value=""]
-          color: $selectron-color-font
+          color: $selectron-color-font-dark
 
         &--is-hovered,
         &:hover
