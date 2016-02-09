@@ -43,19 +43,27 @@ Selectron has been written to be easily customized using Sass variables. To over
 ###Available variables
 ```
 $selectron-border-radius:           4px !default
+$selectron-border-width:            1px !default
 $selectron-color-background-dark:   #363636 !default
 $selectron-color-background-light:  #ffffff !default
 $selectron-color-brand:             #f70c36 !default
-$selectron-color-font:              #666666 !default
-$selectron-color-light:             #999999 !default
+
+$selectron-color-font-dark:         #666666 !default
+$selectron-color-font-light:        #999999 !default
 $selectron-font-family:             sans-serif !default
 $selectron-font-size:               13px !default
+
 $selectron-max-width:               400px !default
 $selectron-min-width:               200px !default
+$selectron-height:                  50px !default
+
 $selectron-padding:                 17px 50px 18px 18px !default
 $selectron-option-padding:          13px 18px 14px !default
 $selectron-optgroup-padding:        13px 18px 14px 28px !default
-$selectron-height:                  50px !default
+
+$selectron-arrow-border-width:      2px !default
+$selectron-arrow-border-radius:     0px !default
+$selectron-arrow-size:              10px !default
 ```
 
 ##Events
