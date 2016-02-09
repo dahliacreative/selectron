@@ -19,7 +19,7 @@ Selectron.prototype.build = function() {
     this.wrapper.append(this.select);
   } else {
     this.searchTerm = '';
-    this.trigger = $('<button class="selectron__trigger">');
+    this.trigger = $('<button class="selectron__trigger" type="button">');
     this.options = $('<ul class="selectron__options"/>');
     this.wrapper.append(this.select, this.trigger, this.options);
     this.registerEvents();
