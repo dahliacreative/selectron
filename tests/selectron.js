@@ -41,7 +41,7 @@ var Selectron = function (select) {
 // --------------------------------------------------------------------------
 Selectron.prototype.build = function() {
   var wrapperClasses = this.select.attr('class');
-  this.wrapper = $('<div class="selectron"/>');
+  this.wrapper = $('<div/>', { 'class': 'selectron' });
   this.wrapper
     .addClass(wrapperClasses)
     .toggleClass('selectron--disabled', this.isDisabled)
@@ -57,8 +57,8 @@ Selectron.prototype.build = function() {
     this.wrapper.append(this.select);
   } else {
     this.searchTerm = '';
-    this.trigger = $('<button class="selectron__trigger" type="button">');
-    this.options = $('<ul class="selectron__options"/>');
+    this.trigger = $('<button/>', { 'class': 'selectron__trigger', 'type': 'button' });
+    this.options = $('<ul/>', { 'class': 'selectron__options' });
     this.wrapper.append(this.select, this.trigger, this.options);
     this.registerEvents();
     this.populateOptions();
@@ -78,7 +78,7 @@ Selectron.prototype.clearSearchTerm = function() {
 Selectron.prototype.closeOptions = function() {
   if(!this.optionsAreHovered) {
     this.options.removeClass('selectron__options--is-open selectron__options--is-overflowing');
-    this.trigger.removeClass('selectron__trigger--is-open');
+    this.trigger.removeClass('selectron__trigger--is-open selectron__trigger--is-overflowing');
     this.isOpen = false;
   }
 }
@@ -91,7 +91,7 @@ Selectron.prototype.createOption = function(selectOption, isInGroup) {
       content = selectOption.text(),
       isDisabled = selectOption.prop('disabled'),
       isSelected = selectOption.prop('selected'),
-      option = $('<li class="selectron__option" data-value="' + value + '">' + content + '</li>'),
+      option = $('<li/>', { 'class': 'selectron__option', 'data-value': value, 'text': content }),
       self = this;
 
   option

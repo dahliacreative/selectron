@@ -6,7 +6,7 @@ Selectron.prototype.createOption = function(selectOption, isInGroup) {
       content = selectOption.text(),
       isDisabled = selectOption.prop('disabled'),
       isSelected = selectOption.prop('selected'),
-      option = $('<li class="selectron__option" data-value="' + value + '">' + content + '</li>'),
+      option = $('<li/>', { 'class': 'selectron__option', 'data-value': value, 'text': content }),
       self = this;
 
   option
