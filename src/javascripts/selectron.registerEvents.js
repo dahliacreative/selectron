@@ -6,6 +6,7 @@ Selectron.prototype.registerEvents = function() {
 
   this.trigger.on({
     'click': function(e) {
+      this.focus();
       self.toggleOptions(e);
     },
     'keyup': function(e) {
