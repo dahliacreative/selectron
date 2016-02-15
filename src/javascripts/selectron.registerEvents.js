@@ -25,7 +25,7 @@ Selectron.prototype.registerEvents = function() {
       self.options.empty();
       self.populateOptions();
     },
-    'change': function() {
+    'selectron.change': function() {
       self.updateValue($(this).val());
     }
   });
