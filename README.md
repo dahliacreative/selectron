@@ -67,10 +67,10 @@ $selectron-arrow-size:              10px !default
 ```
 
 ##Events
-Selectron triggers a `selectron.change` event on the original `select` for you to listen to. This allows you to change the value of the `select` dynamically and trigger a `change` event, which in turn will update selectron.
+Selectron triggers a `change` event on the `select`;
 
 ##Methods
-Selectron provides an `selectron.update` method which when triggered on the original `select` will re-populate the options.
+Selectron provides an `selectron.update` method which when triggered on the `select` will re-populate the options. It also provides a `selectron.change` method which when triggered on the `select` will update the sellectron trigger to match the value of the `select`
 
 ##License
 Copyright (c) 2016 Simon Sturgess
