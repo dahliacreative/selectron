@@ -120,9 +120,9 @@ $selectron-arrow-size:              10px !default</code></pre>
         <div class="content">
           <h2 class="heading">Events</h2>
           <div class="well">
-            <p>Selectron triggers a <code>selectron.change</code> event on the original <code>select</code> for you to listen to. This allows you to change the value of the <code>select</code> dynamically and trigger a <code>change</code> event, which in turn will update selectron.</p>
+            <p>Selectron triggers a <code>change</code> event on the <code>select</code> for you to listen to as you would with a normal <code>select</code>.</p>
             <p>JS</p>
-            <pre><code>$('select').on('selectron.change', function() {
+            <pre><code>$('select').on('change', function() {
   // Do something here;
 });</code></pre>
           </div>
@@ -133,11 +133,16 @@ $selectron-arrow-size:              10px !default</code></pre>
         <div class="content">
           <h2 class="heading">Methods</h2>
           <div class="well">
-            <p>Selectron provides an <code>selectron.update</code> method which when triggered on the original <code>select</code> will re-populate the options.</p>
+            <p>Selectron provides an <code>selectron.update</code> method which when triggered on the <code>select</code> will re-populate the options.</p>
             <p>JS</p>
             <pre><code>$('select')
   .append('&lt;option value=&quot;val&quot;&gt;Some option&lt;/option&gt;')
   .trigger('selectron.update');</code></pre>
+            <p>Selectron also provides a <code>selectron.change</code> method which when triggered on the <code>select</code> will update selectron to match the value of the <code>select</code></p>
+            <p>JS</p>
+            <pre><code>$('select')
+  .val(1)
+  .trigger('selectron.change');</code></pre>
           </div>
         </div>
       </section>
