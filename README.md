@@ -72,6 +72,7 @@ $selectron-color-font-dark:         #666666 !default
 $selectron-color-font-light:        #999999 !default
 $selectron-font-family:             sans-serif !default
 $selectron-font-size:               13px !default
+$selectron-line-height:             13px !default
 
 $selectron-max-width:               400px !default
 $selectron-min-width:               200px !default
