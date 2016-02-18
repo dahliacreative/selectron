@@ -12,7 +12,19 @@ Selectron.prototype.populateOptions = function() {
     if(isOptGroup) {
       var groupOptions = child.children(),
           content = child.attr('label'),
-          optionGroup = $('<li class="selectron__option-group">' + content + '</li>');
+          icon = child.data('icon'),
+          classes = child.attr('class');
+
+          var optionGroup = $('<li/>', {
+            class: 'selectron__option-group',
+            text: content
+          })
+          .addClass(classes);
+
+          if(icon) {
+            var image = $('<img/>', { src: icon, class: 'selectron__icon' });
+            optionGroup.prepend(image);
+          }
 
       self.options.append(optionGroup);
       groupOptions.each(function() {
