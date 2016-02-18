@@ -28,12 +28,32 @@ $('.selectron').selectron();
 ```
 
 ##Themes
-There are two default themes, light and dark. The light theme is applied by default, to apply the dark theme simply add the `selectron--dark` class to your select, or any other class you want to be added to selectron.
+There are two default themes, light and dark. The light theme is applied by default, to apply the dark theme simply add the `selectron--dark` class to your select.
 ```
 <select class="selectron selectron--dark">
   <option value="">Please select something</option>
   <option value="1">Option 1</option>
   <option value="2">Option 2</option>
+</select>
+```
+
+##Icons
+You can add an icon to your options by simply adding a `data-icon` attribute to the option.
+```
+<select class="selectron selectron--dark">
+  <option value="">Please select something</option>
+  <option value="1" data-icon="http://placehold.it/30x20">Option 1</option>
+  <option value="2" data-icon="http://placehold.it/30x20">Option 2</option>
+</select>
+```
+
+##Classes
+Any classes you add to your select or option will get copied across to selectron, this is useful for custom themes or for adding icons to options.
+```
+<select class="selectron my-class">
+  <option value="">Please select something</option>
+  <option value="1" class="my-class">Option 1</option>
+  <option value="2" class="my-class">Option 2</option>
 </select>
 ```
 
