@@ -13,7 +13,10 @@ Selectron.prototype.registerEvents = function() {
       self.handleKeyStrokes(e);
     },
     'keydown': function(e) {
-      e.preventDefault();
+      var tabKeyPressed = e.which === 9;
+      if(!tabKeyPressed) {
+        e.preventDefault();
+      }
     },
     'blur': function() {
       self.closeOptions();
