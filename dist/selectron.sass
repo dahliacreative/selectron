@@ -42,6 +42,9 @@ $selectron-arrow-border-width:      2px !default
 $selectron-arrow-border-radius:     0px !default
 $selectron-arrow-size:              10px !default
 
+$selectron-max-icon-size:           50px !default
+$selectron-icon-margin:             0 10px 0px 0 !default
+
 
 // --------------------------------------------------------------------------
 // Default Theme
@@ -214,6 +217,17 @@ $selectron-arrow-size:              10px !default
     &--is-hovered
       background-color: $selectron-color-brand
       color: #fff !important
+
+
+  // ------------------------------------------------------------------------
+  // Option
+  // ------------------------------------------------------------------------    
+
+  &__icon
+    display: inline-block
+    margin: $selectron-icon-margin
+    max-width: $selectron-max-icon-size
+    vertical-align: middle
 
 
   // ------------------------------------------------------------------------
