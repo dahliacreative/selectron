@@ -16,9 +16,9 @@
 
 (function(window, $) {
 
-  $.fn.selectron = function() {
+  $.fn.selectron = function(options) {
     return this.each(function() {
-      new Selectron($(this)).build();
+      new Selectron($(this), options).build();
     });
   };
 
@@ -27,10 +27,11 @@
 // --------------------------------------------------------------------------
 // Selectron Constructor
 // --------------------------------------------------------------------------
-var Selectron = function (select) {
+var Selectron = function(select, options) {
   if(select.hasClass('selectron__select') || select[0].tagName !== 'SELECT') {
     return;
   }
+  this.options = $.extend({}, options);
   this.isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
   this.isDisabled = select.prop('disabled');
   this.select = select;
