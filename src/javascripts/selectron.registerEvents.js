@@ -61,7 +61,15 @@ Selectron.prototype.registerEvents = function() {
         }    
       },
       'keyup': function(e) {
-        self.filterOptions(e);
+        var upArrowKeyPressed = e.which === 38,
+            downArrowKeyPressed = e.which === 40,
+            enterKeyPressed = e.which === 13;
+
+        if(downArrowKeyPressed || upArrowKeyPressed || enterKeyPressed) {
+          self.handleKeyStrokes(e);
+        } else {
+          self.filterOptions(e);
+        }
       },
       'blur': function() {
         self.closeOptions(true);

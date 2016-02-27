@@ -26,6 +26,7 @@ Selectron.prototype.handleKeyStrokes = function(e) {
     if(this.searchTerm === "") {
       if(!this.isOpen) {
         this.openOptions();
+        return;
       } else {
         this.closeOptions();
         this.updateSelection(hovered);
@@ -53,6 +54,7 @@ Selectron.prototype.handleKeyStrokes = function(e) {
   }
 
   if((alphaNumbericKeyPressed || spaceKeyPressed) && !this.search) {
+    console.log('searching')
     clearTimeout(this.searchTimeout);
     
     this.searchTimeout = setTimeout(function() {

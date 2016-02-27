@@ -92,7 +92,9 @@ Selectron.prototype.closeOptions = function(search) {
     if(!search || search === true && !this.triggerIsHovered) {
       this.options.removeClass('selectron__options--is-open selectron__options--is-overflowing');
       this.trigger.removeClass('selectron__trigger--is-open selectron__trigger--is-overflowing');
-      this.search.removeClass('selectron__search--is-open selectron__search--is-overflowing');
+      if(this.search) {
+        this.search.removeClass('selectron__search--is-open selectron__search--is-overflowing');
+      }
       this.isOpen = false;
       this.trigger.focus();
     }
@@ -145,18 +147,23 @@ Selectron.prototype.createOption = function(selectOption, isInGroup) {
 // --------------------------------------------------------------------------
 Selectron.prototype.filterOptions = function(e) {
   
-  this.handleKeyStrokes(e);
   var searchTerm = this.search.val().toLowerCase(),
-      options = this.options.children(':not(".selectron__no-results")'),
+      options = this.select.find('option:not([value=""])'),
       matchedItems = 0;
+
+  this.options.empty();
+  if(searchTerm === '') {
+    this.populateOptions();
+    return;
+  }
 
   for (var i = 0; i < options.length; i++) {
     var option = $(options[i]),
         text = option.text().toLowerCase(),
         matches = text.indexOf(searchTerm) > -1;
 
-    option.toggle(matches);
     if(matches) {
+      this.options.append(this.createOption(option));
       matchedItems ++;
     }
   }
@@ -164,6 +171,8 @@ Selectron.prototype.filterOptions = function(e) {
   if(matchedItems < 1) {
     this.options.append(this.noResults);
   } else {
+    var firstOption = this.options.find('.selectron__option:first-child');
+    firstOption.addClass('selectron__option--is-hovered');
     this.noResults.remove();
   }
 }
@@ -196,6 +205,7 @@ Selectron.prototype.handleKeyStrokes = function(e) {
     if(this.searchTerm === "") {
       if(!this.isOpen) {
         this.openOptions();
+        return;
       } else {
         this.closeOptions();
         this.updateSelection(hovered);
@@ -223,6 +233,7 @@ Selectron.prototype.handleKeyStrokes = function(e) {
   }
 
   if((alphaNumbericKeyPressed || spaceKeyPressed) && !this.search) {
+    console.log('searching')
     clearTimeout(this.searchTimeout);
     
     this.searchTimeout = setTimeout(function() {
@@ -313,7 +324,7 @@ Selectron.prototype.populateOptions = function() {
     }
   });
 
-  var firstOption = this.options.find('.selectron__option:first');
+  var firstOption = this.options.find('.selectron__option:first-child');
   firstOption.addClass('selectron__option--is-hovered');
   this.placeholderExists = firstOption.data('value') === '';
 
@@ -383,7 +394,15 @@ Selectron.prototype.registerEvents = function() {
         }    
       },
       'keyup': function(e) {
-        self.filterOptions(e);
+        var upArrowKeyPressed = e.which === 38,
+            downArrowKeyPressed = e.which === 40,
+            enterKeyPressed = e.which === 13;
+
+        if(downArrowKeyPressed || upArrowKeyPressed || enterKeyPressed) {
+          self.handleKeyStrokes(e);
+        } else {
+          self.filterOptions(e);
+        }
       },
       'blur': function() {
         self.closeOptions(true);
@@ -417,7 +436,7 @@ Selectron.prototype.toggleOptions = function(e) {
         .toggleClass('selectron__search--is-overflowing', isOverflowing);
     }
 
-    if(!this.isOpen) {
+    if(!this.isOpen && this.search) {
       this.search.focus();
     }
 
@@ -458,6 +477,14 @@ Selectron.prototype.updateSelection = function(selected) {
   selected.addClass('selectron__option--is-selected').siblings().removeClass('selectron__option--is-selected');
   this.updateTrigger();
   this.select.val(value).trigger('change');
+  if(this.search) {
+    this.search.val('');
+    this.options.empty();
+    this.populateOptions();
+  }
+  if(this.isOpen) {
+    this.closeOptions();
+  }
 }
 
 // --------------------------------------------------------------------------
@@ -472,9 +499,6 @@ Selectron.prototype.updateTrigger = function() {
   this.trigger.html(content);
   this.trigger.toggleClass('selectron__trigger--is-filled', !isPlaceholder);
   this.optionsAreHovered = false;
-  if(this.isOpen) {
-    this.closeOptions();
-  }
 }
 
 // --------------------------------------------------------------------------

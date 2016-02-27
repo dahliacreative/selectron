@@ -23,7 +23,7 @@ Selectron.prototype.toggleOptions = function(e) {
         .toggleClass('selectron__search--is-overflowing', isOverflowing);
     }
 
-    if(!this.isOpen) {
+    if(!this.isOpen && this.search) {
       this.search.focus();
     }
 

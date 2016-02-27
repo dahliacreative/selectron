@@ -3,18 +3,23 @@
 // --------------------------------------------------------------------------
 Selectron.prototype.filterOptions = function(e) {
   
-  this.handleKeyStrokes(e);
   var searchTerm = this.search.val().toLowerCase(),
-      options = this.options.children(':not(".selectron__no-results")'),
+      options = this.select.find('option:not([value=""])'),
       matchedItems = 0;
+
+  this.options.empty();
+  if(searchTerm === '') {
+    this.populateOptions();
+    return;
+  }
 
   for (var i = 0; i < options.length; i++) {
     var option = $(options[i]),
         text = option.text().toLowerCase(),
         matches = text.indexOf(searchTerm) > -1;
 
-    option.toggle(matches);
     if(matches) {
+      this.options.append(this.createOption(option));
       matchedItems ++;
     }
   }
@@ -22,6 +27,8 @@ Selectron.prototype.filterOptions = function(e) {
   if(matchedItems < 1) {
     this.options.append(this.noResults);
   } else {
+    var firstOption = this.options.find('.selectron__option:first-child');
+    firstOption.addClass('selectron__option--is-hovered');
     this.noResults.remove();
   }
 }
