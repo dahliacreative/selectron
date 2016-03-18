@@ -37,4 +37,4 @@ Selectron.prototype.createOption = function(selectOption, isInGroup) {
   });
 
   return option;
-}
+};

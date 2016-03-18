@@ -6,7 +6,7 @@
 //  |___/\___|_|\___|\___|\__|_|  \___/|_| |_|
 //
 // --------------------------------------------------------------------------
-//  Version: 1.1.2
+//  Version: 1.1.3
 //   Author: Simon Sturgess
 //  Website: dahliacreative.github.io/selectron
 //     Docs: dahliacreative.github.io/selectron/docs

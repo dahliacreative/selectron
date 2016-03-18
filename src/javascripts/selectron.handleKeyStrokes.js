@@ -69,5 +69,4 @@ Selectron.prototype.handleKeyStrokes = function(e) {
       }
     }
   }
-
-}
+};

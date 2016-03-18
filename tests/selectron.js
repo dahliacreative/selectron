@@ -6,7 +6,7 @@
 //  |___/\___|_|\___|\___|\__|_|  \___/|_| |_|
 //
 // --------------------------------------------------------------------------
-//  Version: 1.1.2
+//  Version: 1.1.3
 //   Author: Simon Sturgess
 //  Website: dahliacreative.github.io/selectron
 //     Docs: dahliacreative.github.io/selectron/docs
@@ -70,7 +70,7 @@ Selectron.prototype.build = function() {
 // --------------------------------------------------------------------------
 Selectron.prototype.clearSearchTerm = function() {
   this.searchTerm = "";
-}
+};
 
 // --------------------------------------------------------------------------
 // Close options
@@ -81,7 +81,7 @@ Selectron.prototype.closeOptions = function() {
     this.trigger.removeClass('selectron__trigger--is-open selectron__trigger--is-overflowing');
     this.isOpen = false;
   }
-}
+};
 
 // --------------------------------------------------------------------------
 // Create option
@@ -122,7 +122,7 @@ Selectron.prototype.createOption = function(selectOption, isInGroup) {
   });
 
   return option;
-}
+};
 
 // --------------------------------------------------------------------------
 // Handle Keystrokes
@@ -195,8 +195,7 @@ Selectron.prototype.handleKeyStrokes = function(e) {
       }
     }
   }
-
-}
+};
 
 // --------------------------------------------------------------------------
 // Open Options
@@ -207,7 +206,7 @@ Selectron.prototype.openOptions = function() {
         optionsBottom = this.options.offset().top + this.options.height(),
         scrollPosition = win.scrollTop(),
         windowHeight = win.height(),
-        isOverflowing = optionsBottom > (windowHeight - scrollPosition);
+        isOverflowing = optionsBottom > (windowHeight + scrollPosition);
 
     this.options
       .addClass('selectron__options--is-open')
@@ -219,7 +218,7 @@ Selectron.prototype.openOptions = function() {
 
     this.isOpen = true;
   }
-}
+};
 
 // --------------------------------------------------------------------------
 // Populate Options
@@ -323,7 +322,7 @@ Selectron.prototype.toggleOptions = function(e) {
         optionsBottom = this.options.offset().top + this.options.height(),
         scrollPosition = win.scrollTop(),
         windowHeight = win.height(),
-        isOverflowing = optionsBottom > (windowHeight - scrollPosition);
+        isOverflowing = optionsBottom > (windowHeight + scrollPosition);
 
     this.options
       .toggleClass('selectron__options--is-open')
@@ -341,7 +340,7 @@ Selectron.prototype.toggleOptions = function(e) {
 // --------------------------------------------------------------------------
 Selectron.prototype.updateHover = function(hovered) {
   hovered.addClass('selectron__option--is-hovered').siblings().removeClass('selectron__option--is-hovered');
-}
+};
 
 // --------------------------------------------------------------------------
 // Update Scroll Position
@@ -360,7 +359,8 @@ Selectron.prototype.updateScrollPosition = function(hovered) {
   } else if((optionTop - scrollPosition) < 0) {
     this.options.scrollTop(optionTop);
   } 
-}
+};
+
 // --------------------------------------------------------------------------
 // Update Selection
 // --------------------------------------------------------------------------
@@ -369,7 +369,7 @@ Selectron.prototype.updateSelection = function(selected) {
   selected.addClass('selectron__option--is-selected').siblings().removeClass('selectron__option--is-selected');
   this.updateTrigger();
   this.select.val(value).trigger('change');
-}
+};
 
 // --------------------------------------------------------------------------
 // Update Trigger
@@ -384,7 +384,7 @@ Selectron.prototype.updateTrigger = function() {
   this.trigger.toggleClass('selectron__trigger--is-filled', !isPlaceholder);
   this.optionsAreHovered = false;
   this.closeOptions();
-}
+};
 
 // --------------------------------------------------------------------------
 // Update Value
@@ -392,4 +392,4 @@ Selectron.prototype.updateTrigger = function() {
 Selectron.prototype.updateValue = function(value) {
   this.options.find('[data-value="' + value + '"]').addClass('selectron__option--is-selected').siblings().removeClass('selectron__option--is-selected');
   this.updateTrigger();
-}
+};

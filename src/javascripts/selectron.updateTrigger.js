@@ -11,4 +11,4 @@ Selectron.prototype.updateTrigger = function() {
   this.trigger.toggleClass('selectron__trigger--is-filled', !isPlaceholder);
   this.optionsAreHovered = false;
   this.closeOptions();
-}
+};

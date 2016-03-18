@@ -6,4 +6,4 @@ Selectron.prototype.updateSelection = function(selected) {
   selected.addClass('selectron__option--is-selected').siblings().removeClass('selectron__option--is-selected');
   this.updateTrigger();
   this.select.val(value).trigger('change');
-}
+};

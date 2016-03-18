@@ -7,4 +7,4 @@ Selectron.prototype.closeOptions = function() {
     this.trigger.removeClass('selectron__trigger--is-open selectron__trigger--is-overflowing');
     this.isOpen = false;
   }
-}
+};
