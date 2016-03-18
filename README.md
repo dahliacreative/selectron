@@ -72,11 +72,13 @@ $selectron-color-font-dark:         #666666 !default
 $selectron-color-font-light:        #999999 !default
 $selectron-font-family:             sans-serif !default
 $selectron-font-size:               13px !default
-$selectron-line-height:             13px !default
+$selectron-line-height:             1.2 !default
+$selectron-text-align:              left !default
 
 $selectron-max-width:               400px !default
 $selectron-min-width:               200px !default
 $selectron-height:                  50px !default
+$selectron-options-max-height:      200px !default
 
 $selectron-padding:                 17px 50px 18px 18px !default
 $selectron-option-padding:          13px 18px 14px !default
@@ -85,6 +87,9 @@ $selectron-optgroup-padding:        13px 18px 14px 28px !default
 $selectron-arrow-border-width:      2px !default
 $selectron-arrow-border-radius:     0px !default
 $selectron-arrow-size:              10px !default
+
+$selectron-max-icon-size:           50px !default
+$selectron-icon-margin:             0 10px 0px 0 !default
 ```
 
 ##Events
