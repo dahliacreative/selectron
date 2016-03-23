@@ -6,7 +6,7 @@
 //  |___/\___|_|\___|\___|\__|_|  \___/|_| |_|
 //
 // --------------------------------------------------------------------------
-//  Version: 1.1.4
+//  Version: 2.0.0
 //   Author: Simon Sturgess
 //  Website: dahliacreative.github.io/selectron
 //     Docs: dahliacreative.github.io/selectron/docs
@@ -141,7 +141,7 @@ Selectron.prototype.createOption = function(selectOption, isInGroup) {
 };
 
 // --------------------------------------------------------------------------
-// Handle Keystrokes
+// Filter Options
 // --------------------------------------------------------------------------
 Selectron.prototype.filterOptions = function(e) {
   
