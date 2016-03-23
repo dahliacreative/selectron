@@ -3,4 +3,4 @@
 // --------------------------------------------------------------------------
 Selectron.prototype.clearSearchTerm = function() {
   this.searchTerm = "";
-}
+};

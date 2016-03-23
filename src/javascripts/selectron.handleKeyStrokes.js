@@ -54,7 +54,6 @@ Selectron.prototype.handleKeyStrokes = function(e) {
   }
 
   if((alphaNumbericKeyPressed || spaceKeyPressed) && !this.search) {
-    console.log('searching')
     clearTimeout(this.searchTimeout);
     
     this.searchTimeout = setTimeout(function() {
@@ -74,5 +73,4 @@ Selectron.prototype.handleKeyStrokes = function(e) {
       }
     }
   }
-
-}
+};

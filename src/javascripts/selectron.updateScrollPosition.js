@@ -15,4 +15,4 @@ Selectron.prototype.updateScrollPosition = function(hovered) {
   } else if((optionTop - scrollPosition) < 0) {
     this.options.scrollTop(optionTop);
   } 
-}
+};

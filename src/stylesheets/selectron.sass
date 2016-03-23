@@ -6,7 +6,7 @@
 //  |___/\___|_|\___|\___|\__|_|  \___/|_| |_|
 //
 // --------------------------------------------------------------------------
-//  Version: 1.1.1
+//  Version: 1.1.4
 //   Author: Simon Sturgess
 //  Website: dahliacreative.github.io/selectron
 //     Docs: dahliacreative.github.io/selectron/docs
@@ -30,15 +30,18 @@ $selectron-color-font-light:        #999999 !default
 $selectron-font-family:             sans-serif !default
 $selectron-font-size:               13px !default
 $selectron-line-height:             1.2 !default
+$selectron-text-align:              left !default
 
 $selectron-max-width:               400px !default
 $selectron-min-width:               200px !default
 $selectron-height:                  50px !default
+$selectron-options-max-height:      200px !default
 
 $selectron-padding:                 17px 50px 18px 18px !default
 $selectron-option-padding:          13px 18px 14px !default
 $selectron-optgroup-padding:        13px 18px 14px 28px !default
 $selectron-search-padding:          14px 18px 14px 18px !default
+$selectron-search-height:           45px !default
 
 $selectron-arrow-border-width:      2px !default
 $selectron-arrow-border-radius:     0px !default
@@ -112,6 +115,7 @@ $selectron-icon-margin:             0 10px 0px 0 !default
     box-sizing: border-box
     color: lighten($selectron-color-font-dark, 30%)
     cursor: pointer
+    font-family: $selectron-font-family
     font-size: $selectron-font-size
     height: $selectron-height
     line-height: $selectron-line-height
@@ -119,7 +123,7 @@ $selectron-icon-margin:             0 10px 0px 0 !default
     overflow: hidden
     padding: $selectron-padding
     position: relative
-    text-align: left
+    text-align: $selectron-text-align
     text-overflow: ellipsis
     white-space: nowrap
     width: 100%
@@ -162,21 +166,28 @@ $selectron-icon-margin:             0 10px 0px 0 !default
   // ------------------------------------------------------------------------
 
   &__search
-    border: $selectron-border-width solid $selectron-color-font-light
     border-radius: 0
+    border: $selectron-border-width solid $selectron-color-font-light
     border-top: none
     box-sizing: border-box
     color: $selectron-color-font-dark
     font-family: $selectron-font-family
     font-size: $selectron-font-size
+    height: $selectron-search-height
+    left: 0
     opacity: 0
     outline: none
     padding: $selectron-search-padding
+    position: absolute
+    top: 100%
     visibility: hidden
     width: 100%
     -webkit-appearance: none
     -moz-appearance: none
     appearance: none
+
+    + .selectron__options
+      top: calc(100% + #{$selectron-search-height})
 
     &--is-open
       opacity: 1
@@ -196,11 +207,12 @@ $selectron-icon-margin:             0 10px 0px 0 !default
     left: 0
     list-style: none
     margin: 0
-    max-height: 200px
+    max-height: $selectron-options-max-height
     opacity: 0
     overflow: auto
     padding: 0
     position: absolute
+    text-align: $selectron-text-align
     top: 100%
     visibility: hidden
     width: 100%

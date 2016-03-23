@@ -6,7 +6,7 @@
 //  |___/\___|_|\___|\___|\__|_|  \___/|_| |_|
 //
 // --------------------------------------------------------------------------
-//  Version: 1.1.1
+//  Version: 1.1.4
 //   Author: Simon Sturgess
 //  Website: dahliacreative.github.io/selectron
 //     Docs: dahliacreative.github.io/selectron/docs
@@ -42,21 +42,19 @@ var Selectron = function(select, options) {
 // --------------------------------------------------------------------------
 Selectron.prototype.build = function() {
   var wrapperClasses = this.select.attr('class');
-  this.wrapper = $('<div/>', { 'class': 'selectron' });
+
+  this.select
+    .removeAttr('class')
+    .addClass('selectron__select')
+    .wrap('<div class="selectron"/>');
+
+  this.wrapper = this.select.parent('.selectron');
   this.wrapper
     .addClass(wrapperClasses)
     .toggleClass('selectron--disabled', this.isDisabled)
     .toggleClass('selectron--is-touch', this.isTouch);
 
-  this.select
-    .removeAttr('class')
-    .addClass('selectron__select');
-
-  this.select.replaceWith(this.wrapper);
-
-  if(this.isTouch) {
-    this.wrapper.append(this.select);
-  } else {
+  if(!this.isTouch) {
     if(this.options.search) {
       this.search = $('<input/>', { 
         'type': 'text',
@@ -71,7 +69,7 @@ Selectron.prototype.build = function() {
     this.searchTerm = '';
     this.trigger = $('<button/>', { 'class': 'selectron__trigger', 'type': 'button' });
     this.options = $('<ul/>', { 'class': 'selectron__options' });
-    this.wrapper.append(this.select, this.trigger, this.search, this.options);
+    this.wrapper.append(this.trigger, this.search, this.options);
     this.registerEvents();
     this.populateOptions();
   }
@@ -82,7 +80,7 @@ Selectron.prototype.build = function() {
 // --------------------------------------------------------------------------
 Selectron.prototype.clearSearchTerm = function() {
   this.searchTerm = "";
-}
+};
 
 // --------------------------------------------------------------------------
 // Close options
@@ -99,7 +97,7 @@ Selectron.prototype.closeOptions = function(search) {
       this.trigger.focus();
     }
   }
-}
+};
 
 // --------------------------------------------------------------------------
 // Create option
@@ -140,7 +138,7 @@ Selectron.prototype.createOption = function(selectOption, isInGroup) {
   });
 
   return option;
-}
+};
 
 // --------------------------------------------------------------------------
 // Handle Keystrokes
@@ -233,7 +231,6 @@ Selectron.prototype.handleKeyStrokes = function(e) {
   }
 
   if((alphaNumbericKeyPressed || spaceKeyPressed) && !this.search) {
-    console.log('searching')
     clearTimeout(this.searchTimeout);
     
     this.searchTimeout = setTimeout(function() {
@@ -253,8 +250,7 @@ Selectron.prototype.handleKeyStrokes = function(e) {
       }
     }
   }
-
-}
+};
 
 // --------------------------------------------------------------------------
 // Open Options
@@ -265,7 +261,7 @@ Selectron.prototype.openOptions = function() {
         optionsBottom = this.options.offset().top + this.options.height(),
         scrollPosition = win.scrollTop(),
         windowHeight = win.height(),
-        isOverflowing = optionsBottom > (windowHeight - scrollPosition);
+        isOverflowing = optionsBottom > (windowHeight + scrollPosition);
 
     this.options
       .addClass('selectron__options--is-open')
@@ -284,7 +280,7 @@ Selectron.prototype.openOptions = function() {
 
     this.isOpen = true;
   }
-}
+};
 
 // --------------------------------------------------------------------------
 // Populate Options
@@ -339,7 +335,7 @@ Selectron.prototype.registerEvents = function() {
 
   this.trigger.on({
     'click': function(e) {
-      this.focus();
+      $(this).focus();
       self.toggleOptions(e);
     },
     'keyup': function(e) {
@@ -352,7 +348,7 @@ Selectron.prototype.registerEvents = function() {
       }
     },
     'blur': function() {
-      if(!self.search) {
+      if(!self.search || !self.triggerIsHovered) {
         self.closeOptions();
       }
     },
@@ -422,7 +418,7 @@ Selectron.prototype.toggleOptions = function(e) {
         optionsBottom = this.options.offset().top + this.options.height(),
         scrollPosition = win.scrollTop(),
         windowHeight = win.height(),
-        isOverflowing = optionsBottom > (windowHeight - scrollPosition);
+        isOverflowing = optionsBottom > (windowHeight + scrollPosition);
 
     this.options
       .toggleClass('selectron__options--is-open')
@@ -449,7 +445,7 @@ Selectron.prototype.toggleOptions = function(e) {
 // --------------------------------------------------------------------------
 Selectron.prototype.updateHover = function(hovered) {
   hovered.addClass('selectron__option--is-hovered').siblings().removeClass('selectron__option--is-hovered');
-}
+};
 
 // --------------------------------------------------------------------------
 // Update Scroll Position
@@ -468,7 +464,8 @@ Selectron.prototype.updateScrollPosition = function(hovered) {
   } else if((optionTop - scrollPosition) < 0) {
     this.options.scrollTop(optionTop);
   } 
-}
+};
+
 // --------------------------------------------------------------------------
 // Update Selection
 // --------------------------------------------------------------------------
@@ -485,7 +482,7 @@ Selectron.prototype.updateSelection = function(selected) {
   if(this.isOpen) {
     this.closeOptions();
   }
-}
+};
 
 // --------------------------------------------------------------------------
 // Update Trigger
@@ -499,7 +496,9 @@ Selectron.prototype.updateTrigger = function() {
   this.trigger.html(content);
   this.trigger.toggleClass('selectron__trigger--is-filled', !isPlaceholder);
   this.optionsAreHovered = false;
-}
+  this.closeOptions();
+};
+
 
 // --------------------------------------------------------------------------
 // Update Value
@@ -507,4 +506,4 @@ Selectron.prototype.updateTrigger = function() {
 Selectron.prototype.updateValue = function(value) {
   this.options.find('[data-value="' + value + '"]').addClass('selectron__option--is-selected').siblings().removeClass('selectron__option--is-selected');
   this.updateTrigger();
-}
+};

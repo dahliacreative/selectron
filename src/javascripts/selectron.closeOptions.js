@@ -13,4 +13,4 @@ Selectron.prototype.closeOptions = function(search) {
       this.trigger.focus();
     }
   }
-}
+};

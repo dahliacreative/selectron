@@ -14,4 +14,4 @@ Selectron.prototype.updateSelection = function(selected) {
   if(this.isOpen) {
     this.closeOptions();
   }
-}
+};

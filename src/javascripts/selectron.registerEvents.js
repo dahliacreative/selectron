@@ -6,7 +6,7 @@ Selectron.prototype.registerEvents = function() {
 
   this.trigger.on({
     'click': function(e) {
-      this.focus();
+      $(this).focus();
       self.toggleOptions(e);
     },
     'keyup': function(e) {
@@ -19,7 +19,7 @@ Selectron.prototype.registerEvents = function() {
       }
     },
     'blur': function() {
-      if(!self.search) {
+      if(!self.search || !self.triggerIsHovered) {
         self.closeOptions();
       }
     },

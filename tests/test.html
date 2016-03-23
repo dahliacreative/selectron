@@ -9,7 +9,20 @@
   </head>
 
   <body>
-    <select class="selectron">
+    <select class="no-search">
+      <option value="">Please select something</option>
+      <optgroup label="Cool People">
+        <option value="Max">Max</option>
+        <option value="Miles">Miles</option>
+        <option value="Millie">Millie</option>
+      </optgroup>
+      <optgroup label="Not Cool People">
+        <option value="Other">Everyone Else</option>
+        <option value="Boom">Secret</option>
+      </optgroup>
+    </select>
+
+    <select class="search">
       <option value="">Please select something</option>
       <optgroup label="Cool People">
         <option value="Max">Max</option>
@@ -23,7 +36,12 @@
     </select>
 
     <script>
-    $('.selectron').selectron();
+    $('select').on('change', function() {
+      console.log('select changed');
+    });
+    $('select').selectron({
+      'search': false
+    });
     </script>
   </body>
 
