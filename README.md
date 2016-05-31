@@ -94,6 +94,7 @@ $selectron-optgroup-padding:        13px 18px 14px 28px !default
 $selectron-arrow-border-width:      2px !default
 $selectron-arrow-border-radius:     0px !default
 $selectron-arrow-size:              10px !default
+$selectron-block-width:             50px !default
 
 $selectron-max-icon-size:           50px !default
 $selectron-icon-margin:             0 10px 0px 0 !default
