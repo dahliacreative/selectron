@@ -89,6 +89,7 @@ Selectron.prototype.createOption = function(selectOption, isInGroup) {
       content = selectOption.text(),
       classes = selectOption.attr('class'),
       isDisabled = selectOption.prop('disabled'),
+      isHidden = selectOption.is('[hidden]'),
       isSelected = selectOption.prop('selected'),
       icon = selectOption.data('icon'),
       self = this;
@@ -107,6 +108,7 @@ Selectron.prototype.createOption = function(selectOption, isInGroup) {
   option
     .addClass(classes)
     .toggleClass('selectron__option--is-disabled', isDisabled)
+    .toggleClass('selectron__option--hidden', isHidden)
     .toggleClass('selectron__option--is-selected', isSelected)
     .toggleClass('selectron__option--optgroup', isInGroup);
 
