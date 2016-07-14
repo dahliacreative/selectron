@@ -16,7 +16,7 @@ Selectron.prototype.build = function() {
     .toggleClass('selectron--is-touch', this.isTouch);
 
   if(!this.isTouch) {
-    if(this.options.search) {
+    if(this.opts.search) {
       this.search = $('<input/>', { 
         'type': 'text',
         'class': 'selectron__search' ,

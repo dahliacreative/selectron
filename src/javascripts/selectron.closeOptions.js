@@ -3,7 +3,7 @@
 // --------------------------------------------------------------------------
 Selectron.prototype.closeOptions = function(search) {
   if(!this.optionsAreHovered) {
-    if(!search || search === true && !this.triggerIsHovered) {
+    if(!search || (search === true && !this.triggerIsHovered)) {
       this.options.removeClass('selectron__options--is-open selectron__options--is-overflowing');
       this.trigger.removeClass('selectron__trigger--is-open selectron__trigger--is-overflowing');
       if(this.search) {

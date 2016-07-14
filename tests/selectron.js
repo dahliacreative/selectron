@@ -31,10 +31,13 @@ var Selectron = function(select, options) {
   if(select.hasClass('selectron__select') || select[0].tagName !== 'SELECT') {
     return;
   }
-  this.options = $.extend({}, options);
+  this.opts = $.extend({}, options);
   this.isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
   this.isDisabled = select.prop('disabled');
   this.select = select;
+  if(select[0].hasAttribute('data-search')) {
+    this.opts.search = select.data('search');
+  }
 };
 
 // --------------------------------------------------------------------------
@@ -55,7 +58,7 @@ Selectron.prototype.build = function() {
     .toggleClass('selectron--is-touch', this.isTouch);
 
   if(!this.isTouch) {
-    if(this.options.search) {
+    if(this.opts.search) {
       this.search = $('<input/>', { 
         'type': 'text',
         'class': 'selectron__search' ,
@@ -87,7 +90,7 @@ Selectron.prototype.clearSearchTerm = function() {
 // --------------------------------------------------------------------------
 Selectron.prototype.closeOptions = function(search) {
   if(!this.optionsAreHovered) {
-    if(!search || search === true && !this.triggerIsHovered) {
+    if(!search || (search === true && !this.triggerIsHovered)) {
       this.options.removeClass('selectron__options--is-open selectron__options--is-overflowing');
       this.trigger.removeClass('selectron__trigger--is-open selectron__trigger--is-overflowing');
       if(this.search) {

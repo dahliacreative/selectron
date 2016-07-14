@@ -31,8 +31,11 @@ var Selectron = function(select, options) {
   if(select.hasClass('selectron__select') || select[0].tagName !== 'SELECT') {
     return;
   }
-  this.options = $.extend({}, options);
+  this.opts = $.extend({}, options);
   this.isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
   this.isDisabled = select.prop('disabled');
   this.select = select;
+  if(select[0].hasAttribute('data-search')) {
+    this.opts.search = select.data('search');
+  }
 };
