@@ -8,8 +8,7 @@
 // --------------------------------------------------------------------------
 //  Version: 2.0.0
 //   Author: Simon Sturgess
-//  Website: dahliacreative.github.io/selectron
-//     Docs: dahliacreative.github.io/selectron/docs
+//     Docs: dahliacreative.github.io/selectron
 //     Repo: github.com/dahliacreative/selectron
 //   Issues: github.com/dahliacreative/selectron/issues
 // --------------------------------------------------------------------------
@@ -35,8 +34,8 @@ var Selectron = function(select, options) {
   this.isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0);
   this.isDisabled = select.prop('disabled');
   this.select = select;
-  if(select[0].hasAttribute('data-search')) {
-    this.opts.search = select.data('search');
+  if(select[0].hasAttribute('data-selectron-search')) {
+    this.opts.search = select.data('selectron-search');
   }
 };
 

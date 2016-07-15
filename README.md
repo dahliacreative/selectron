@@ -27,6 +27,22 @@ bower install --save jquery-selectron
 $('.selectron').selectron();
 ```
 
+###Search
+You can enable search by passing the option when you initialize the plugin.
+```
+$('.selectron').selectron({
+  search: true
+});
+```
+Alternativley you can enable/disable search on inidividual instances using a data attribute:
+```
+<select class="selectron" data-selectron-search="true">
+  <option value="">Please select something</option>
+  <option value="1">Option 1</option>
+  <option value="2">Option 2</option>
+</select>
+```
+
 ##Themes
 There are two default themes, light and dark. The light theme is applied by default, to apply the dark theme simply add the `selectron--dark` class to your select.
 ```
