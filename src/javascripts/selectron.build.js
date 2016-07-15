@@ -31,6 +31,7 @@ Selectron.prototype.build = function() {
     this.trigger = $('<button/>', { 'class': 'selectron__trigger', 'type': 'button' });
     this.options = $('<ul/>', { 'class': 'selectron__options' });
     this.wrapper.append(this.trigger, this.search, this.options);
+    this.isOpen = false;
     this.registerEvents();
     this.populateOptions();
   }

@@ -19,7 +19,7 @@ Selectron.prototype.registerEvents = function() {
       }
     },
     'blur': function() {
-      if(!self.search || !self.triggerIsHovered) {
+      if((!self.search || !self.triggerIsHovered) && self.isOpen) {
         self.closeOptions();
       }
     },
@@ -58,7 +58,7 @@ Selectron.prototype.registerEvents = function() {
 
         if(downArrowKeyPressed || upArrowKeyPressed) {
           e.preventDefault();
-        }    
+        } 
       },
       'keyup': function(e) {
         var upArrowKeyPressed = e.which === 38,

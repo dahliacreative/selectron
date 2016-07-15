@@ -16,7 +16,6 @@ Selectron.prototype.handleKeyStrokes = function(e) {
   }
 
   if(escapeKeyPressed || enterKeyPressed) {
-    this.closeOptions();
     if(enterKeyPressed) {
       this.updateSelection(hovered);
     }

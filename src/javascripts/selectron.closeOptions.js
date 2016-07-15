@@ -10,7 +10,6 @@ Selectron.prototype.closeOptions = function(search) {
         this.search.removeClass('selectron__search--is-open selectron__search--is-overflowing');
       }
       this.isOpen = false;
-      this.trigger.focus();
     }
   }
 };

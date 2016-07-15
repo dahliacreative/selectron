@@ -39,6 +39,7 @@ Selectron.prototype.populateOptions = function() {
   var firstOption = this.options.find('.selectron__option:first-child');
   firstOption.addClass('selectron__option--is-hovered');
   this.placeholderExists = firstOption.data('value') === '';
-
-  this.updateTrigger();
+  if(!this.isOpen) {
+    this.updateTrigger();
+  }
 };

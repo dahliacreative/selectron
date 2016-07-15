@@ -10,8 +10,8 @@ Selectron.prototype.updateSelection = function(selected) {
     this.search.val('');
     this.options.empty();
     this.populateOptions();
-  }
-  if(this.isOpen) {
+  } else if(this.isOpen) {
     this.closeOptions();
+    this.trigger.focus();
   }
 };

@@ -10,6 +10,9 @@ Selectron.prototype.updateTrigger = function() {
   this.trigger.html(content);
   this.trigger.toggleClass('selectron__trigger--is-filled', !isPlaceholder);
   this.optionsAreHovered = false;
-  this.closeOptions();
+  if(this.isOpen) {
+    this.closeOptions();
+    this.trigger.focus();
+  }
 };
 
