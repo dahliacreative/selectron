@@ -306,6 +306,7 @@ Selectron.prototype.registerEvents = function() {
     },
     'mouseleave': function() {
       self.optionsAreHovered = false;
+      self.options.find('.selectron__option--is-hovered').removeClass('selectron__option--is-hovered');
     }
   });
 };
