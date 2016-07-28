@@ -45,6 +45,7 @@ $selectron-search-height:           45px !default
 $selectron-arrow-border-width:      2px !default
 $selectron-arrow-border-radius:     0px !default
 $selectron-arrow-size:              10px !default
+$selectron-block-width:             50px !default
 
 $selectron-max-icon-size:           50px !default
 $selectron-icon-margin:             0 10px 0px 0 !default
@@ -253,6 +254,9 @@ $selectron-icon-margin:             0 10px 0px 0 !default
     &[data-value=""]
       color: lighten($selectron-color-font-dark, 40%)
 
+    &--is-hidden
+      display: none
+
     &--is-hovered
       background-color: $selectron-color-brand
       color: #fff !important
@@ -286,6 +290,48 @@ $selectron-icon-margin:             0 10px 0px 0 !default
     margin: $selectron-icon-margin
     max-width: $selectron-max-icon-size
     vertical-align: middle
+
+
+  // ------------------------------------------------------------------------
+  // Dark Theme
+  // ------------------------------------------------------------------------
+
+  &--block
+
+    .selectron
+
+      // --------------------------------------------------------------------
+      // Trigger
+      // --------------------------------------------------------------------
+
+      &__trigger
+
+        &:before
+          background-color: $selectron-color-brand
+          border: none
+          height: 100%
+          margin: 0
+          right: 0
+          top: 0
+          width: $selectron-block-width
+          -webkit-transform: none
+          -ms-transform: none
+          -o-transform: none
+          transform: none
+
+        &:after
+          border-color: #ffffff transparent transparent transparent
+          border-style: solid
+          border-width: ($selectron-arrow-size/2) ($selectron-arrow-size/2) 0 ($selectron-arrow-size/2)
+          content: ""
+          height: 0
+          width: 0
+          position: absolute
+          top: 50%
+          margin-top: -$selectron-arrow-size/4
+          right: ($selectron-block-width - $selectron-arrow-size)/2
+
+        
 
 
   // ------------------------------------------------------------------------

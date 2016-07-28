@@ -63,9 +63,11 @@ Selectron.prototype.registerEvents = function() {
       'keyup': function(e) {
         var upArrowKeyPressed = e.which === 38,
             downArrowKeyPressed = e.which === 40,
+            leftArrowKeyPress = e.which === 37,
+            rightArrowKeyPress = e.which === 39,
             enterKeyPressed = e.which === 13;
 
-        if(downArrowKeyPressed || upArrowKeyPressed || enterKeyPressed) {
+        if(downArrowKeyPressed || upArrowKeyPressed || leftArrowKeyPress || rightArrowKeyPress || enterKeyPressed) {
           self.handleKeyStrokes(e);
         } else {
           self.filterOptions(e);

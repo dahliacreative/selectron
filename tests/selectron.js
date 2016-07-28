@@ -91,6 +91,8 @@ Selectron.prototype.clearSearchTerm = function() {
 Selectron.prototype.closeOptions = function(search) {
   if(!this.optionsAreHovered) {
     if(!search || (search === true && !this.triggerIsHovered)) {
+      var hovered = this.options.find('.selectron__option--is-hovered');
+      hovered.removeClass('selectron__option--is-hovered');
       this.options.removeClass('selectron__options--is-open selectron__options--is-overflowing');
       this.trigger.removeClass('selectron__trigger--is-open selectron__trigger--is-overflowing');
       if(this.search) {
@@ -109,6 +111,7 @@ Selectron.prototype.createOption = function(selectOption, isInGroup) {
       content = selectOption.text(),
       classes = selectOption.attr('class'),
       isDisabled = selectOption.prop('disabled'),
+      isHidden = selectOption.is('[hidden]'),
       isSelected = selectOption.prop('selected'),
       icon = selectOption.data('icon'),
       self = this;
@@ -127,6 +130,7 @@ Selectron.prototype.createOption = function(selectOption, isInGroup) {
   option
     .addClass(classes)
     .toggleClass('selectron__option--is-disabled', isDisabled)
+    .toggleClass('selectron__option--hidden', isHidden)
     .toggleClass('selectron__option--is-selected', isSelected)
     .toggleClass('selectron__option--optgroup', isInGroup);
 
@@ -146,7 +150,6 @@ Selectron.prototype.createOption = function(selectOption, isInGroup) {
 // Filter Options
 // --------------------------------------------------------------------------
 Selectron.prototype.filterOptions = function(e) {
-  
   var searchTerm = this.search.val().toLowerCase(),
       options = this.select.find('option:not([value=""])'),
       matchedItems = 0;
@@ -262,7 +265,10 @@ Selectron.prototype.openOptions = function() {
         optionsBottom = this.options.offset().top + this.options.height(),
         scrollPosition = win.scrollTop(),
         windowHeight = win.height(),
-        isOverflowing = optionsBottom > (windowHeight + scrollPosition);
+        isOverflowing = optionsBottom > (windowHeight + scrollPosition),
+        selected = this.options.find('.selectron__option--is-selected');
+
+    selected.addClass('selectron__option--is-hovered');
 
     this.options
       .addClass('selectron__options--is-open')
@@ -322,7 +328,6 @@ Selectron.prototype.populateOptions = function() {
   });
 
   var firstOption = this.options.find('.selectron__option:first-child');
-  firstOption.addClass('selectron__option--is-hovered');
   this.placeholderExists = firstOption.data('value') === '';
   if(!this.isOpen) {
     this.updateTrigger();
@@ -394,9 +399,11 @@ Selectron.prototype.registerEvents = function() {
       'keyup': function(e) {
         var upArrowKeyPressed = e.which === 38,
             downArrowKeyPressed = e.which === 40,
+            leftArrowKeyPress = e.which === 37,
+            rightArrowKeyPress = e.which === 39,
             enterKeyPressed = e.which === 13;
 
-        if(downArrowKeyPressed || upArrowKeyPressed || enterKeyPressed) {
+        if(downArrowKeyPressed || upArrowKeyPressed || leftArrowKeyPress || rightArrowKeyPress || enterKeyPressed) {
           self.handleKeyStrokes(e);
         } else {
           self.filterOptions(e);
@@ -420,7 +427,10 @@ Selectron.prototype.toggleOptions = function(e) {
         optionsBottom = this.options.offset().top + this.options.height(),
         scrollPosition = win.scrollTop(),
         windowHeight = win.height(),
-        isOverflowing = optionsBottom > (windowHeight + scrollPosition);
+        isOverflowing = optionsBottom > (windowHeight + scrollPosition),
+        selected = this.options.find('.selectron__option--is-selected');
+
+    selected.toggleClass('selectron__option--is-hovered');
 
     this.options
       .toggleClass('selectron__options--is-open')

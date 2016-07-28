@@ -9,7 +9,10 @@ Selectron.prototype.toggleOptions = function(e) {
         optionsBottom = this.options.offset().top + this.options.height(),
         scrollPosition = win.scrollTop(),
         windowHeight = win.height(),
-        isOverflowing = optionsBottom > (windowHeight + scrollPosition);
+        isOverflowing = optionsBottom > (windowHeight + scrollPosition),
+        selected = this.options.find('.selectron__option--is-selected');
+
+    selected.toggleClass('selectron__option--is-hovered');
 
     this.options
       .toggleClass('selectron__options--is-open')

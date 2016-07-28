@@ -2,7 +2,6 @@
 // Filter Options
 // --------------------------------------------------------------------------
 Selectron.prototype.filterOptions = function(e) {
-  
   var searchTerm = this.search.val().toLowerCase(),
       options = this.select.find('option:not([value=""])'),
       matchedItems = 0;
