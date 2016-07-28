@@ -101,8 +101,8 @@
 .selectron__search {
     border-radius: 0;
     border: none;
-    border-bottom: 1px solid #666;
-    border-top: 1px solid #666;
+    border-bottom: 1px solid #efefef;
+    border-top: 1px solid #efefef;
     box-sizing: border-box;
     color: #666;
     font-family: sans-serif;
