@@ -42,6 +42,7 @@
 .selectron__trigger {
     background-color: #fff;
     border-radius: 0;
+    border: none;
     box-sizing: border-box;
     color: #b3b3b3;
     cursor: pointer;
@@ -128,7 +129,6 @@
 .selectron__options {
     background-color: #fff;
     border-radius: 0;
-    border: 1px solid #999;
     border-top: none;
     box-sizing: border-box;
     left: 0;
