@@ -100,8 +100,7 @@
 }
 .selectron__search {
     border-radius: 0;
-    border: 1px solid #999;
-    border-top: none;
+    border-bottom: 1px solid #f10c48;
     box-sizing: border-box;
     color: #666;
     font-family: sans-serif;
