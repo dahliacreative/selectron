@@ -42,6 +42,7 @@
 .selectron__trigger {
     background-color: #fff;
     box-sizing: border-box;
+    border: none;
     color: #b3b3b3;
     cursor: pointer;
     font-family: sans-serif;
