@@ -84,8 +84,8 @@
 .selectron--is-touch:before,
 .selectron__trigger:before {
     content: "";
-    border-bottom: 2px solid #9f0053;
-    border-left: 2px solid #9f0053;
+    border-bottom: 2px solid #666;
+    border-left: 2px solid #666;
     height: 10px;
     border-radius: 0;
     width: 10px;
@@ -101,8 +101,8 @@
 .selectron__search {
     border-radius: 0;
     border: none;
-    border-bottom: 1px solid #9f0053;
-    border-top: 1px solid #9f0053;
+    border-bottom: 1px solid #f10c48;
+    border-top: 1px solid #f10c48;
     box-sizing: border-box;
     color: #666;
     font-family: sans-serif;
@@ -171,7 +171,7 @@
 }
 .selectron__option--is-selected {
     background-color: transparent;
-    color: #9f0053
+    color: #f10c48
 }
 .selectron__option--is-disabled,
 .selectron__option[data-value=""] {
@@ -181,7 +181,7 @@
     display: none
 }
 .selectron__option--is-hovered {
-    background-color: #9f0053;
+    background-color: #f10c48;
     color: #fff !important
 }
 .selectron__no-results {
@@ -200,7 +200,7 @@
     vertical-align: middle
 }
 .selectron--block .selectron__trigger:before {
-    background-color: #9f0053;
+    background-color: #f10c48;
     border: none;
     height: 100%;
     margin: 0;
