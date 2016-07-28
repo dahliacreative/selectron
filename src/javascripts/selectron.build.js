@@ -16,10 +16,22 @@ Selectron.prototype.build = function() {
     .toggleClass('selectron--is-touch', this.isTouch);
 
   if(!this.isTouch) {
+    if(this.opts.search) {
+      this.search = $('<input/>', { 
+        'type': 'text',
+        'class': 'selectron__search' ,
+        'placeholder': 'Search'
+      });
+      this.noResults = $('<li/>', {
+        'class': 'selectron__no-results',
+        'text': this.select.data('no-results-text') || 'Sorry there are no matching results'
+      });
+    }
     this.searchTerm = '';
     this.trigger = $('<button/>', { 'class': 'selectron__trigger', 'type': 'button' });
     this.options = $('<ul/>', { 'class': 'selectron__options' });
-    this.wrapper.append(this.trigger, this.options);
+    this.wrapper.append(this.trigger, this.search, this.options);
+    this.isOpen = false;
     this.registerEvents();
     this.populateOptions();
   }

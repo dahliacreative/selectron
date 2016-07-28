@@ -20,6 +20,13 @@ Selectron.prototype.openOptions = function() {
       .addClass('selectron__trigger--is-open')
       .toggleClass('selectron__trigger--is-overflowing', isOverflowing);
 
+    if(this.search) {
+      this.search
+        .addClass('selectron__search--is-open')
+        .toggleClass('selectron__search--is-overflowing', isOverflowing)
+        .focus();
+    }
+
     this.isOpen = true;
   }
 };

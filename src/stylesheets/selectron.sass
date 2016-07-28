@@ -6,10 +6,9 @@
 //  |___/\___|_|\___|\___|\__|_|  \___/|_| |_|
 //
 // --------------------------------------------------------------------------
-//  Version: 1.1.5
+//  Version: 2.0.0
 //   Author: Simon Sturgess
-//  Website: dahliacreative.github.io/selectron
-//     Docs: dahliacreative.github.io/selectron/docs
+//     Docs: dahliacreative.github.io/selectron
 //     Repo: github.com/dahliacreative/selectron
 //   Issues: github.com/dahliacreative/selectron/issues
 // --------------------------------------------------------------------------
@@ -40,6 +39,8 @@ $selectron-options-max-height:      200px !default
 $selectron-padding:                 17px 50px 18px 18px !default
 $selectron-option-padding:          13px 18px 14px !default
 $selectron-optgroup-padding:        13px 18px 14px 28px !default
+$selectron-search-padding:          14px 18px 14px 18px !default
+$selectron-search-height:           45px !default
 
 $selectron-arrow-border-width:      2px !default
 $selectron-arrow-border-radius:     0px !default
@@ -161,6 +162,39 @@ $selectron-icon-margin:             0 10px 0px 0 !default
 
 
   // ------------------------------------------------------------------------
+  // Search
+  // ------------------------------------------------------------------------
+
+  &__search
+    border-radius: 0
+    border: $selectron-border-width solid $selectron-color-font-light
+    border-top: none
+    box-sizing: border-box
+    color: $selectron-color-font-dark
+    font-family: $selectron-font-family
+    font-size: $selectron-font-size
+    height: $selectron-search-height
+    left: 0
+    opacity: 0
+    outline: none
+    padding: $selectron-search-padding
+    position: absolute
+    top: 100%
+    visibility: hidden
+    width: 100%
+    -webkit-appearance: none
+    -moz-appearance: none
+    appearance: none
+
+    + .selectron__options
+      top: calc(100% + #{$selectron-search-height})
+
+    &--is-open
+      opacity: 1
+      visibility: visible
+
+
+  // ------------------------------------------------------------------------
   // Options
   // ------------------------------------------------------------------------
 
@@ -229,15 +263,13 @@ $selectron-icon-margin:             0 10px 0px 0 !default
 
 
   // ------------------------------------------------------------------------
-  // Option
-  // ------------------------------------------------------------------------    
+  // No Results
+  // ------------------------------------------------------------------------
 
-  &__icon
-    display: inline-block
-    margin: $selectron-icon-margin
-    max-width: $selectron-max-icon-size
-    vertical-align: middle
-
+  &__no-results
+    line-height: $selectron-line-height
+    padding: $selectron-option-padding
+    
 
   // ------------------------------------------------------------------------
   // Option Group
@@ -247,6 +279,17 @@ $selectron-icon-margin:             0 10px 0px 0 !default
     color: $selectron-color-font-light
     cursor: default
     padding: $selectron-option-padding
+
+
+  // ------------------------------------------------------------------------
+  // Icon
+  // ------------------------------------------------------------------------    
+
+  &__icon
+    display: inline-block
+    margin: $selectron-icon-margin
+    max-width: $selectron-max-icon-size
+    vertical-align: middle
 
 
   // ------------------------------------------------------------------------

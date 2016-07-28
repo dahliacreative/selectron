@@ -12,9 +12,21 @@
     <select>
       <option value="">Please select something</option>
       <optgroup label="Cool People">
-        <option value="Max">Max Millions</option>
-        <option value="Miles">Miles Davis</option>
-        <option value="Millie">Millie Molly</option>
+        <option value="Max">Max</option>
+        <option value="Miles">Miles</option>
+      </optgroup>
+      <optgroup label="Not Cool People">
+        <option value="Other">Everyone Else</option>
+        <option value="Boom">Secret</option>
+      </optgroup>
+    </select>
+
+    <select data-selectron-search="true">
+      <option value="">Please select something</option>
+      <optgroup label="Cool People">
+        <option value="Max">Max</option>
+        <option value="Miles">Miles</option>
+        <option value="Millie">Millie</option>
       </optgroup>
       <optgroup label="Not Cool People">
         <option value="Other">Everyone Else</option>
@@ -23,9 +35,6 @@
     </select>
 
     <script>
-    $('select').on('change', function() {
-      console.log('select changed');
-    });
     $('select').selectron();
     </script>
   </body>

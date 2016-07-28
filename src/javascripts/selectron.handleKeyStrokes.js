@@ -7,6 +7,7 @@ Selectron.prototype.handleKeyStrokes = function(e) {
       spaceKeyPressed = e.which === 32,
       upArrowKeyPressed = e.which === 38,
       downArrowKeyPressed = e.which === 40,
+      escapeKeyPressed = e.which === 27,
       alphaNumbericKeyPressed = (e.which >= 48 && e.which <= 57) || (e.which >= 65 && e.which <= 90) || e.which === 8,
       self = this;
 
@@ -14,9 +15,10 @@ Selectron.prototype.handleKeyStrokes = function(e) {
     return false;
   }
 
-  if(enterKeyPressed) {
-    this.closeOptions();
-    this.updateSelection(hovered);
+  if(escapeKeyPressed || enterKeyPressed) {
+    if(enterKeyPressed) {
+      this.updateSelection(hovered);
+    }
   }
 
   if(spaceKeyPressed) {
@@ -50,7 +52,7 @@ Selectron.prototype.handleKeyStrokes = function(e) {
     this.updateScrollPosition(nextElement);
   }
 
-  if(alphaNumbericKeyPressed || spaceKeyPressed) {
+  if((alphaNumbericKeyPressed || spaceKeyPressed) && !this.search) {
     clearTimeout(this.searchTimeout);
     
     this.searchTimeout = setTimeout(function() {

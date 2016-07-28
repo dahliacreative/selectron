@@ -19,9 +19,15 @@ Selectron.prototype.registerEvents = function() {
       }
     },
     'blur': function() {
-      if(!$(this).is(':hover')) {
+      if((!self.search || !self.triggerIsHovered) && self.isOpen) {
         self.closeOptions();
       }
+    },
+    'mouseenter': function() {
+      self.triggerIsHovered = true;
+    },
+    'mouseleave': function() {
+      self.triggerIsHovered = false;
     }
   });
 
@@ -43,4 +49,33 @@ Selectron.prototype.registerEvents = function() {
       self.optionsAreHovered = false;
     }
   });
+
+  if(this.search) {
+    this.search.on({
+      'keydown': function(e) {
+        var upArrowKeyPressed = e.which === 38,
+            downArrowKeyPressed = e.which === 40;
+
+        if(downArrowKeyPressed || upArrowKeyPressed) {
+          e.preventDefault();
+        } 
+      },
+      'keyup': function(e) {
+        var upArrowKeyPressed = e.which === 38,
+            downArrowKeyPressed = e.which === 40,
+            leftArrowKeyPress = e.which === 37,
+            rightArrowKeyPress = e.which === 39,
+            enterKeyPressed = e.which === 13;
+
+        if(downArrowKeyPressed || upArrowKeyPressed || leftArrowKeyPress || rightArrowKeyPress || enterKeyPressed) {
+          self.handleKeyStrokes(e);
+        } else {
+          self.filterOptions(e);
+        }
+      },
+      'blur': function() {
+        self.closeOptions(true);
+      }
+    });
+  }
 };
