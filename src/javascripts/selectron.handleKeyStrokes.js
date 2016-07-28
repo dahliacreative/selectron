@@ -23,6 +23,7 @@ Selectron.prototype.handleKeyStrokes = function(e) {
     if(this.searchTerm === "") {
       if(!this.isOpen) {
         this.openOptions();
+        return;
       } else {
         this.closeOptions();
         this.updateSelection(hovered);

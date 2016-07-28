@@ -75,6 +75,8 @@ Selectron.prototype.clearSearchTerm = function() {
 // --------------------------------------------------------------------------
 Selectron.prototype.closeOptions = function() {
   if(!this.optionsAreHovered) {
+    var hovered = this.options.find('.selectron__option--is-hovered');
+    hovered.removeClass('selectron__option--is-hovered');
     this.options.removeClass('selectron__options--is-open selectron__options--is-overflowing');
     this.trigger.removeClass('selectron__trigger--is-open selectron__trigger--is-overflowing');
     this.isOpen = false;
@@ -149,6 +151,7 @@ Selectron.prototype.handleKeyStrokes = function(e) {
     if(this.searchTerm === "") {
       if(!this.isOpen) {
         this.openOptions();
+        return;
       } else {
         this.closeOptions();
         this.updateSelection(hovered);
@@ -206,7 +209,10 @@ Selectron.prototype.openOptions = function() {
         optionsBottom = this.options.offset().top + this.options.height(),
         scrollPosition = win.scrollTop(),
         windowHeight = win.height(),
-        isOverflowing = optionsBottom > (windowHeight + scrollPosition);
+        isOverflowing = optionsBottom > (windowHeight + scrollPosition),
+        selected = this.options.find('.selectron__option--is-selected');
+
+    selected.addClass('selectron__option--is-hovered');
 
     this.options
       .addClass('selectron__options--is-open')
@@ -308,7 +314,6 @@ Selectron.prototype.registerEvents = function() {
     },
     'mouseleave': function() {
       self.optionsAreHovered = false;
-      self.options.find('.selectron__option--is-hovered').removeClass('selectron__option--is-hovered');
     }
   });
 };
@@ -323,7 +328,10 @@ Selectron.prototype.toggleOptions = function(e) {
         optionsBottom = this.options.offset().top + this.options.height(),
         scrollPosition = win.scrollTop(),
         windowHeight = win.height(),
-        isOverflowing = optionsBottom > (windowHeight + scrollPosition);
+        isOverflowing = optionsBottom > (windowHeight + scrollPosition),
+        selected = this.options.find('.selectron__option--is-selected');
+
+    selected.toggleClass('selectron__option--is-hovered');
 
     this.options
       .toggleClass('selectron__options--is-open')
