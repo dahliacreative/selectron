@@ -6,7 +6,7 @@
 //  |___/\___|_|\___|\___|\__|_|  \___/|_| |_|
 //
 // --------------------------------------------------------------------------
-//  Version: 2.0.0
+//  Version: 2.0.1
 //   Author: Simon Sturgess
 //     Docs: dahliacreative.github.io/selectron
 //     Repo: github.com/dahliacreative/selectron
@@ -193,7 +193,14 @@ Selectron.prototype.handleKeyStrokes = function(e) {
       alphaNumbericKeyPressed = (e.which >= 48 && e.which <= 57) || (e.which >= 65 && e.which <= 90) || e.which === 8,
       self = this;
 
-  if(!this.isOpen && (upArrowKeyPressed || downArrowKeyPressed || enterKeyPressed)) {
+
+
+  if(!this.isOpen && enterKeyPressed) {
+    return false;
+  }
+
+  if(!this.isOpen && (upArrowKeyPressed || downArrowKeyPressed)) {
+    this.openOptions();
     return false;
   }
 
@@ -201,6 +208,9 @@ Selectron.prototype.handleKeyStrokes = function(e) {
     if(enterKeyPressed) {
       this.updateSelection(hovered);
     }
+    if(escapeKeyPressed && this.isOpen) {
+      this.closeOptions();
+    } 
   }
 
   if(spaceKeyPressed) {
@@ -326,9 +336,11 @@ Selectron.prototype.populateOptions = function() {
       self.options.append(self.createOption(child, false));
     }
   });
-
   var firstOption = this.options.find('.selectron__option:first-child');
   this.placeholderExists = firstOption.data('value') === '';
+  if(this.opts.search) {
+    firstOption.addClass('selectron__option--is-hovered');
+  }
   if(!this.isOpen) {
     this.updateTrigger();
   }
@@ -401,7 +413,13 @@ Selectron.prototype.registerEvents = function() {
             downArrowKeyPressed = e.which === 40,
             leftArrowKeyPress = e.which === 37,
             rightArrowKeyPress = e.which === 39,
-            enterKeyPressed = e.which === 13;
+            enterKeyPressed = e.which === 13,
+            escapeKeyPressed = e.which === 27;
+
+        if(escapeKeyPressed && self.isOpen) {
+          self.closeOptions();
+          return false;
+        }
 
         if(downArrowKeyPressed || upArrowKeyPressed || leftArrowKeyPress || rightArrowKeyPress || enterKeyPressed) {
           self.handleKeyStrokes(e);

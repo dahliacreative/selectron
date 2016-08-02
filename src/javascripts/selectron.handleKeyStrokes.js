@@ -11,7 +11,14 @@ Selectron.prototype.handleKeyStrokes = function(e) {
       alphaNumbericKeyPressed = (e.which >= 48 && e.which <= 57) || (e.which >= 65 && e.which <= 90) || e.which === 8,
       self = this;
 
-  if(!this.isOpen && (upArrowKeyPressed || downArrowKeyPressed || enterKeyPressed)) {
+
+
+  if(!this.isOpen && enterKeyPressed) {
+    return false;
+  }
+
+  if(!this.isOpen && (upArrowKeyPressed || downArrowKeyPressed)) {
+    this.openOptions();
     return false;
   }
 
@@ -19,6 +26,9 @@ Selectron.prototype.handleKeyStrokes = function(e) {
     if(enterKeyPressed) {
       this.updateSelection(hovered);
     }
+    if(escapeKeyPressed && this.isOpen) {
+      this.closeOptions();
+    } 
   }
 
   if(spaceKeyPressed) {

@@ -35,9 +35,11 @@ Selectron.prototype.populateOptions = function() {
       self.options.append(self.createOption(child, false));
     }
   });
-
   var firstOption = this.options.find('.selectron__option:first-child');
   this.placeholderExists = firstOption.data('value') === '';
+  if(this.opts.search) {
+    firstOption.addClass('selectron__option--is-hovered');
+  }
   if(!this.isOpen) {
     this.updateTrigger();
   }
