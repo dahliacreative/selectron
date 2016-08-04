@@ -1,6 +1,5 @@
 {
   "name": "selectron",
-  "version": "1.1.5",
   "description": "An accessible jQuery custom select, styled with sass for easy customization",
   "homepage": "https://github.com/dahliacreative/selectron",
   "authors": [
