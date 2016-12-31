@@ -6,7 +6,7 @@
 //  |___/\___|_|\___|\___|\__|_|  \___/|_| |_|
 //
 // --------------------------------------------------------------------------
-//  Version: 2.0.4
+//  Version: 2.0.5
 //   Author: Simon Sturgess
 //     Docs: dahliacreative.github.io/selectron
 //     Repo: github.com/dahliacreative/selectron
@@ -381,6 +381,8 @@
       'selectron.update': function() {
         self.options.empty();
         self.populateOptions();
+        self.isDisabled = self.select.prop('disabled');
+        self.wrapper.toggleClass('selectron--disabled', self.isDisabled);
       },
       'selectron.change': function() {
         self.updateValue($(this).val());
@@ -404,7 +406,7 @@
 
           if(downArrowKeyPressed || upArrowKeyPressed) {
             e.preventDefault();
-          } 
+          }
         },
         'keyup': function(e) {
           var upArrowKeyPressed = e.which === 38,

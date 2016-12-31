@@ -6,7 +6,7 @@
 //  |___/\___|_|\___|\___|\__|_|  \___/|_| |_|
 //
 // --------------------------------------------------------------------------
-//  Version: 2.0.4
+//  Version: 2.0.5
 //   Author: Simon Sturgess
 //     Docs: dahliacreative.github.io/selectron
 //     Repo: github.com/dahliacreative/selectron
@@ -70,6 +70,7 @@ $selectron-icon-margin:             0 10px 0px 0 !default
 
   &--disabled
     opacity: 0.5
+    pointer-events: none
 
   &--is-touch &
 
@@ -170,8 +171,8 @@ $selectron-icon-margin:             0 10px 0px 0 !default
     -webkit-appearance: none
     appearance: none
     border-radius: 0
-    border-top: none
     border: $selectron-border-width solid $selectron-color-font-light
+    border-top: none
     box-sizing: border-box
     color: $selectron-color-font-dark
     font-family: $selectron-font-family
@@ -263,6 +264,9 @@ $selectron-icon-margin:             0 10px 0px 0 !default
     &--is-disabled,
     &[data-value=""]
       color: lighten($selectron-color-font-dark, 40%)
+
+    &--is-disabled
+      pointer-events: none
 
     &--is-hidden
       display: none
