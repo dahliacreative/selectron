@@ -6,7 +6,7 @@
 //  |___/\___|_|\___|\___|\__|_|  \___/|_| |_|
 //
 // --------------------------------------------------------------------------
-//  Version: 2.0.5
+//  Version: 2.0.6
 //   Author: Simon Sturgess
 //     Docs: dahliacreative.github.io/selectron
 //     Repo: github.com/dahliacreative/selectron
@@ -249,7 +249,7 @@
         self.clearSearchTerm();
       }, 500);
       this.searchTerm += String.fromCharCode(e.which).toLowerCase();
-      optCount = this.options.find('li').length + 1;
+      var optCount = this.options.find('li').length + 1;
       for(var i = 1; i < optCount; i ++) {
         var current = this.options.find('.selectron__option:nth-child(' + i + ')'),
             text = current.text().toLowerCase();
