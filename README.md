@@ -1,3 +1,6 @@
+# !!! NOT ACTIVELY MAINTAINED !!!
+I am no longer maintaining this proejct, if you want to take over, feel free to drop me a msg.
+
 # Selectron
 
 _An accessible jQuery custom select, styled with sass for easy customization_  
