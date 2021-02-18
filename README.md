@@ -3,7 +3,7 @@ I am no longer maintaining this proejct, if you want to take over, feel free to 
 
 # Selectron
 
-_An accessible jQuery custom select, styled with sass for easy customization_  
+_A jQuery custom select, styled with sass for easy customization_  
 [http://dahliacreative.github.io/selectron/](http://dahliacreative.github.io/selectron/)
 
 
